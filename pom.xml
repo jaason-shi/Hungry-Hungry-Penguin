@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                ca.bcit.comp2522.termproject.penguinpursuit/ca.bcit.comp2522.termproject.penguinpursuit.HelloApplication
+                                ca.bcit.comp2522.termproject.penguinpursuit/ca.bcit.comp2522.termproject.penguinpursuit.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

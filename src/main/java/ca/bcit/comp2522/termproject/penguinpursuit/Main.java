@@ -8,14 +8,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.RecursiveAction;
 
 public class Main extends Application {
     @Override
@@ -43,7 +46,19 @@ public class Main extends Application {
         imageView.setX(290);
         imageView.setY(220);
 
-        Scene gameScene = new Scene(new Group(), 800, 600, Color.AQUAMARINE);
+        Group root2 = new Group();
+        Scene gameScene = new Scene(root2, 800, 600, Color.AQUAMARINE);
+
+        Platform platform = new Platform();
+        platform.addPlatform(0, 550, 800, 50);
+        platform.addPlatform(200, 400, 400, 50);
+
+        Pane platformPane = new Pane();
+        for (Rectangle rectangle : platform.getPlatforms()) {
+            rectangle.setFill(Color.ALICEBLUE); // set platform color
+            platformPane.getChildren().add(rectangle);
+        }
+
         Button button = new Button("Start");
         button.setLayoutX(365);
         button.setLayoutY(500);
@@ -54,13 +69,15 @@ public class Main extends Application {
             stage.show();
         });
 
-
-
+        root2.getChildren().add(platformPane);
         root.getChildren().add(text);
         root.getChildren().add(imageView);
         root.getChildren().add(button);
         stage.setScene(scene);
         stage.show();
+
+
+
     }
 
     public static void main(String[] args) {

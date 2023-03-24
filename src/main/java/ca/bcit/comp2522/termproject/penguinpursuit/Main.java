@@ -27,7 +27,7 @@ public class Main extends Application {
 //        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
 
         Group root = new Group();
-        Scene scene = new Scene(root, 800, 600, Color.AQUAMARINE);
+        Scene scene = new Scene(root, 800, 600, Color.SKYBLUE);
         stage.getIcons().add(new Image("icon.png"));
         stage.setTitle("Penguin Pursuit");
         stage.setResizable(false);
@@ -47,7 +47,7 @@ public class Main extends Application {
         imageView.setY(220);
 
         Group root2 = new Group();
-        Scene gameScene = new Scene(root2, 800, 600, Color.AQUAMARINE);
+        Scene gameScene = new Scene(root2, 800, 600, Color.SKYBLUE);
 
         Platform platform = new Platform();
         platform.addPlatform(0, 550, 800, 50);

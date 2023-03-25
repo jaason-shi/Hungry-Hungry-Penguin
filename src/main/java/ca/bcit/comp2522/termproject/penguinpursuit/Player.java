@@ -5,7 +5,7 @@ public class Player {
     private int yCoordinate;
     private int width;
     private int height;
-    private int speed;
+    private int speed = 2;
     private Direction direction;
     public Player(int xCoordinate, int yCoordinate, int width, int height, int speed, Direction direction) {
         this.xCoordinate = xCoordinate;
@@ -16,29 +16,28 @@ public class Player {
         this.direction = direction;
     }
 
-    public int xCoordinate() {
-        return xCoordinate;
-    }
-
-    public int yCoordinate() {
-        return yCoordinate;
-    }
-
     public void movePlayer() {
-        if (direction == Direction.UP) {
-            yCoordinate -= speed;
-        } else if (direction == Direction.DOWN) {
-            yCoordinate += speed;
-        } else if (direction == Direction.LEFT) {
-            xCoordinate -= speed;
-        } else if (direction == Direction.RIGHT) {
-            xCoordinate += speed;
+        switch (direction) {
+            case UP:
+                yCoordinate -= speed;
+                break;
+            case DOWN:
+                yCoordinate += speed;
+                break;
+            case LEFT:
+                xCoordinate -= speed;
+                break;
+            case RIGHT:
+                xCoordinate += speed;
+                break;
+            default:
+                break;
         }
     }
 
-    public void setDirection(Direction direction) {
-        this.direction = direction;
+    public void jump() {
+        for (int i = 0; i < 10; i++) {
+            yCoordinate -= 1;
+        }
     }
-
-//    public void jump
 }

@@ -49,8 +49,8 @@ public class Main extends Application {
         imageView.setX(290);
         imageView.setY(220);
 
-        Group gameRoot = new Group();
-        Scene gameScene = new Scene(gameRoot, 800, 600, Color.SKYBLUE);
+        Group root2 = new Group();
+        Scene gameScene = new Scene(root2, 800, 600, Color.SKYBLUE);
 
         Platform platform = new Platform();
         platform.addPlatform(0, 550, 300, 50);
@@ -93,8 +93,8 @@ public class Main extends Application {
             stage.show();
         });
 
-        gameRoot.getChildren().add(platformPane);
-        gameRoot.getChildren().add(playerPane);
+        root2.getChildren().add(platformPane);
+        root2.getChildren().add(playerPane);
 
         root.getChildren().add(text);
         root.getChildren().add(imageView);

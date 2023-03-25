@@ -1,6 +1,7 @@
 package ca.bcit.comp2522.termproject.penguinpursuit;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -8,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -64,6 +67,21 @@ public class Main extends Application {
         Player player = new Player(25, 500, 50, 50, 2, Direction.RIGHT);
         Pane playerPane = new Pane();
         playerPane.getChildren().add(player.getSquare());
+
+    EventHandler<KeyEvent> keyListener = new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent keyEvent) {
+            if (keyEvent.getCode() == KeyCode.UP) {
+                player.jump();
+            }else if (keyEvent.getCode() == KeyCode.DOWN) {
+                player.moveDown();
+            } else if (keyEvent.getCode() == KeyCode.LEFT) {
+                player.moveLeft();
+            } else if (keyEvent.getCode() == KeyCode.RIGHT) {
+                player.moveRight();
+            }
+            }
+        };
 
         Button button = new Button("Start");
         button.setLayoutX(365);

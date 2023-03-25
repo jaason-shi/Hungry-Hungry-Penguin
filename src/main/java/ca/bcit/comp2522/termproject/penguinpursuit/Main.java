@@ -50,8 +50,10 @@ public class Main extends Application {
         Scene gameScene = new Scene(root2, 800, 600, Color.SKYBLUE);
 
         Platform platform = new Platform();
-        platform.addPlatform(0, 550, 800, 50);
-        platform.addPlatform(200, 400, 400, 50);
+        platform.addPlatform(0, 550, 300, 50);
+        platform.addPlatform(320, 450, 150, 50);
+        platform.addPlatform(500, 550, 250, 50);
+
 
         Pane platformPane = new Pane();
         for (Rectangle rectangle : platform.getPlatforms()) {

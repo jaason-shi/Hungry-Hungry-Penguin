@@ -46,8 +46,8 @@ public class Main extends Application {
         imageView.setX(290);
         imageView.setY(220);
 
-        Group root2 = new Group();
-        Scene gameScene = new Scene(root2, 800, 600, Color.SKYBLUE);
+        Group gameRoot = new Group();
+        Scene gameScene = new Scene(gameRoot, 800, 600, Color.SKYBLUE);
 
         Platform platform = new Platform();
         platform.addPlatform(0, 550, 300, 50);
@@ -57,9 +57,13 @@ public class Main extends Application {
 
         Pane platformPane = new Pane();
         for (Rectangle rectangle : platform.getPlatforms()) {
-            rectangle.setFill(Color.ALICEBLUE); // set platform color
+            rectangle.setFill(Color.ALICEBLUE);
             platformPane.getChildren().add(rectangle);
         }
+
+        Player player = new Player(25, 500, 50, 50, 2, Direction.RIGHT);
+        Pane playerPane = new Pane();
+        playerPane.getChildren().add(player.getSquare());
 
         Button button = new Button("Start");
         button.setLayoutX(365);
@@ -71,7 +75,9 @@ public class Main extends Application {
             stage.show();
         });
 
-        root2.getChildren().add(platformPane);
+        gameRoot.getChildren().add(platformPane);
+        gameRoot.getChildren().add(playerPane);
+
         root.getChildren().add(text);
         root.getChildren().add(imageView);
         root.getChildren().add(button);

@@ -73,11 +73,9 @@ public class Main extends Application {
         root.getChildren().add(text);
         root.getChildren().add(imageView);
         root.getChildren().add(button);
+
         stage.setScene(scene);
         stage.show();
-
-
-
     }
 
     public static void main(String[] args) {

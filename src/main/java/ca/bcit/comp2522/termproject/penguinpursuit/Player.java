@@ -19,7 +19,7 @@ public class Player {
     private boolean canJump;
     private Rectangle square;
 
-    public Player(int xCoordinate, int yCoordinate, int width, int height, int speed, Direction direction) {
+    public Player(int width, int height, Direction direction) {
         this.xCoordinate = 25;
         this.yCoordinate = 500;
         this.width = width;
@@ -32,50 +32,15 @@ public class Player {
         square.setFill(Color.BLUE);
     }
 
-    public void movePlayer(KeyEvent event) {
-        KeyCode code = event.getCode();
-        switch (code) {
-            case UP:
-                if(canJump) {
-                    jump();
-                    canJump = false;
-                }
-                break;
-            case DOWN:
-                direction = Direction.DOWN;
-                yCoordinate += speed;
-                break;
-            case LEFT:
-                direction = Direction.LEFT;
-                xCoordinate -= speed;
-                break;
-            case RIGHT:
-                direction = Direction.RIGHT;
-                xCoordinate += speed;
-                break;
-            default:
-                break;
-        }
+
+
+    public int getxCoordinate() {
+        return xCoordinate;
     }
 
-
-//        gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent keyEvent) {
-//                switch(keyEvent.getCode(){
-//                    case UP:
-//                        break;
-//                    case DOWN:
-//                        break;
-//                    case LEFT:
-//                        break;
-//                    case RIGHT:
-//                        break;
-//                    default:
-//                        break;
-//                })
-//            }
-//        });
+    public int getyCoordinate() {
+        return yCoordinate;
+    }
 
     public void jump() {
         for (int i = 0; i < 10; i++) {
@@ -96,6 +61,7 @@ public class Player {
     public void moveDown(){
     yCoordinate += speed;
     }
+
     public Rectangle getSquare() {
         return square;
     }

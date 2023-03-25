@@ -21,6 +21,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.security.Key;
 import java.util.concurrent.RecursiveAction;
 
 public class Main extends Application {
@@ -64,7 +65,7 @@ public class Main extends Application {
             platformPane.getChildren().add(rectangle);
         }
 
-        Player player = new Player(25, 500, 50, 50, 2, Direction.RIGHT);
+        Player player = new Player(50, 50, Direction.RIGHT);
         Pane playerPane = new Pane();
         playerPane.getChildren().add(player.getSquare());
 
@@ -82,6 +83,29 @@ public class Main extends Application {
             }
             }
         };
+
+        gameScene.setOnKeyPressed(keyEvent -> {
+            switch(keyEvent.getCode()) {
+                case UP:
+                    player.jump();
+                    break;
+                case DOWN:
+                    player.moveDown();
+                    break;
+                case LEFT:
+                    player.moveLeft();
+                    break;
+                case RIGHT:
+                    player.moveRight();
+                    break;
+                default:
+                    break;
+            }
+
+            player.getSquare().setX(player.getxCoordinate());
+            player.getSquare().setX(player.getyCoordinate());
+        });
+
 
         Button button = new Button("Start");
         button.setLayoutX(365);

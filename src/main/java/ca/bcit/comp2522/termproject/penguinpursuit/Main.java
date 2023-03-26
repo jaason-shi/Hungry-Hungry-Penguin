@@ -103,7 +103,7 @@ public class Main extends Application {
             }
 
             player.getSquare().setX(player.getxCoordinate());
-            player.getSquare().setX(player.getyCoordinate());
+            player.getSquare().setY(player.getyCoordinate());
         });
 
 

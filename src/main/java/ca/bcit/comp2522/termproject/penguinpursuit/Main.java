@@ -79,20 +79,20 @@ public class Main extends Application {
         Pane penguinPane = new Pane();
         penguinPane.getChildren().add(penguin.getPenguin());
 
-    EventHandler<KeyEvent> keyListener = new EventHandler<KeyEvent>() {
-        @Override
-        public void handle(KeyEvent keyEvent) {
-            if (keyEvent.getCode() == KeyCode.UP) {
-                penguin.jump();
-            }else if (keyEvent.getCode() == KeyCode.DOWN) {
-                penguin.moveDown();
-            } else if (keyEvent.getCode() == KeyCode.LEFT) {
-                penguin.moveLeft();
-            } else if (keyEvent.getCode() == KeyCode.RIGHT) {
-                penguin.moveRight();
-            }
-            }
-        };
+//    EventHandler<KeyEvent> keyListener = new EventHandler<KeyEvent>() {
+//        @Override
+//        public void handle(KeyEvent keyEvent) {
+//            if (keyEvent.getCode() == KeyCode.UP) {
+//                penguin.jump();
+//            }else if (keyEvent.getCode() == KeyCode.DOWN) {
+//                penguin.moveDown();
+//            } else if (keyEvent.getCode() == KeyCode.LEFT) {
+//                penguin.moveLeft();
+//            } else if (keyEvent.getCode() == KeyCode.RIGHT) {
+//                penguin.moveRight();
+//            }
+//            }
+//        };
 
         gameScene.setOnKeyPressed(keyEvent -> {
             switch(keyEvent.getCode()) {
@@ -100,13 +100,13 @@ public class Main extends Application {
                     penguin.jump();
                     break;
                 case DOWN:
-                    penguin.moveDown();
+                    penguin.moveDown(scene);
                     break;
                 case LEFT:
                     penguin.moveLeft();
                     break;
                 case RIGHT:
-                    penguin.moveRight();
+                    penguin.moveRight(scene);
                     break;
                 default:
                     break;

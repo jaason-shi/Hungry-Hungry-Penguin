@@ -2,6 +2,7 @@ package ca.bcit.comp2522.termproject.penguinpursuit;
 
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -58,23 +59,34 @@ public class Player {
     }
 
     public void jump() {
-        for (int i = 0; i < 10; i++) {
-            yCoordinate -= 1;
+        if(getyCoordinate() > 0) {
+            for (int i = 0; i < 10; i++) {
+                yCoordinate -= 1;
+            }
         }
     }
 
     public void moveLeft(){
-    xCoordinate -= speed;
+        if(getxCoordinate() > 0) {
+            xCoordinate -= 7;
+        }
     }
 
-    public void moveRight(){
-    xCoordinate += speed;
+    public void moveRight(Scene scene){
+        if(getxCoordinate() < scene.getWidth() - penguin.getFitWidth()) {
+            xCoordinate += 7;
+        }
     }
     public void moveUp(){
-    yCoordinate -= speed;
+        if(getyCoordinate() > 0) {
+            yCoordinate -= 7;
+        }
     }
-    public void moveDown(){
-    yCoordinate += speed;
+
+    public void moveDown(Scene scene){
+        if(getyCoordinate() < scene.getHeight() - penguin.getFitHeight()) {
+            yCoordinate += 7;
+        }
     }
 
     public boolean collisionDetection(ArrayList<Rectangle> obstacles) {

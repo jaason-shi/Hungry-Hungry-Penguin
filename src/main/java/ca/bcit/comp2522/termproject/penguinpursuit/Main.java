@@ -67,28 +67,29 @@ public class Main extends Application {
             platformPane.getChildren().add(rectangle);
         }
 
-//        Canvas canvas = new Canvas(600, 600);
-//        GraphicsContext context = canvas.getGraphicsContext2D();
-        Sprite penguin = new Sprite();
-        penguin.position.set(100, 100);
-        penguin.setImage("icon.png");
-//        penguin.render(context);
+////        Canvas canvas = new Canvas(600, 600);
+////        GraphicsContext context = canvas.getGraphicsContext2D();
+//        Sprite penguin = new Sprite();
+//        penguin.position.set(100, 100);
+//        penguin.setImage("penguin.png");
+////        penguin.render(context);
+//
 
-        Player player = new Player(50, 50, Direction.RIGHT);
-        Pane playerPane = new Pane();
-        playerPane.getChildren().add(player.getSquare());
+        Player penguin = new Player(50, 50, Direction.RIGHT);
+        Pane penguinPane = new Pane();
+        penguinPane.getChildren().add(penguin.getPenguin());
 
     EventHandler<KeyEvent> keyListener = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent keyEvent) {
             if (keyEvent.getCode() == KeyCode.UP) {
-                player.jump();
+                penguin.jump();
             }else if (keyEvent.getCode() == KeyCode.DOWN) {
-                player.moveDown();
+                penguin.moveDown();
             } else if (keyEvent.getCode() == KeyCode.LEFT) {
-                player.moveLeft();
+                penguin.moveLeft();
             } else if (keyEvent.getCode() == KeyCode.RIGHT) {
-                player.moveRight();
+                penguin.moveRight();
             }
             }
         };
@@ -96,23 +97,23 @@ public class Main extends Application {
         gameScene.setOnKeyPressed(keyEvent -> {
             switch(keyEvent.getCode()) {
                 case UP:
-                    player.jump();
+                    penguin.jump();
                     break;
                 case DOWN:
-                    player.moveDown();
+                    penguin.moveDown();
                     break;
                 case LEFT:
-                    player.moveLeft();
+                    penguin.moveLeft();
                     break;
                 case RIGHT:
-                    player.moveRight();
+                    penguin.moveRight();
                     break;
                 default:
                     break;
             }
 
-            player.getSquare().setX(player.getxCoordinate());
-            player.getSquare().setY(player.getyCoordinate());
+            penguin.getPenguin().setX(penguin.getxCoordinate());
+            penguin.getPenguin().setY(penguin.getyCoordinate());
         });
 
 
@@ -126,9 +127,8 @@ public class Main extends Application {
             stage.show();
         });
 
-        root2.getChildren().add(penguin);
         root2.getChildren().add(platformPane);
-        root2.getChildren().add(playerPane);
+        root2.getChildren().add(penguinPane);
 
         root.getChildren().add(text);
         root.getChildren().add(imageView);

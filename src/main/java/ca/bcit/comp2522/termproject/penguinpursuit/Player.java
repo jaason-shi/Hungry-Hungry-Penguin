@@ -3,6 +3,7 @@ package ca.bcit.comp2522.termproject.penguinpursuit;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -18,19 +19,27 @@ public class Player {
     private int speed;
     private Direction direction;
     private boolean canJump;
-    private Rectangle square;
+    private ImageView penguin;
 
     public Player(int width, int height, Direction direction) {
         this.xCoordinate = 25;
-        this.yCoordinate = 500;
+        this.yCoordinate = 507;
         this.width = width;
         this.height = height;
         this.speed = 2;
         this.direction = direction;
         this.canJump = true;
 
-        square = new Rectangle(xCoordinate, yCoordinate, width, height);
-        square.setFill(Color.BLUE);
+        Image penguinImage = new Image("penguin.png");
+        penguin = new ImageView(penguinImage);
+        penguin.setX(xCoordinate);
+        penguin.setY(yCoordinate);
+        penguin.setFitWidth(width);
+        penguin.setFitHeight(height);
+    }
+
+    public ImageView getPenguin() {
+        return penguin;
     }
 
     public Image getCharacter() {
@@ -68,13 +77,9 @@ public class Player {
     yCoordinate += speed;
     }
 
-    public Rectangle getSquare() {
-        return square;
-    }
-
     public boolean collisionDetection(ArrayList<Rectangle> obstacles) {
         for (Rectangle obstacle: obstacles) {
-            if (square.getBoundsInParent().intersects(obstacle.getBoundsInParent())) {
+            if (penguin.getBoundsInParent().intersects(obstacle.getBoundsInParent())) {
                 return true;
             }
         }

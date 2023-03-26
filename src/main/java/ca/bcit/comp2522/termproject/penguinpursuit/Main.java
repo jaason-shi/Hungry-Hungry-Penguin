@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -65,6 +67,13 @@ public class Main extends Application {
             platformPane.getChildren().add(rectangle);
         }
 
+//        Canvas canvas = new Canvas(600, 600);
+//        GraphicsContext context = canvas.getGraphicsContext2D();
+        Sprite penguin = new Sprite();
+        penguin.position.set(100, 100);
+        penguin.setImage("icon.png");
+//        penguin.render(context);
+
         Player player = new Player(50, 50, Direction.RIGHT);
         Pane playerPane = new Pane();
         playerPane.getChildren().add(player.getSquare());
@@ -117,6 +126,7 @@ public class Main extends Application {
             stage.show();
         });
 
+        root2.getChildren().add(penguin);
         root2.getChildren().add(platformPane);
         root2.getChildren().add(playerPane);
 

@@ -2,6 +2,7 @@ package ca.bcit.comp2522.termproject.penguinpursuit;
 
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -32,6 +33,11 @@ public class Player {
         square.setFill(Color.BLUE);
     }
 
+    public Image getCharacter() {
+        return character;
+    }
+
+    Image character = new Image("icon.png");
 
 
     public int getxCoordinate() {

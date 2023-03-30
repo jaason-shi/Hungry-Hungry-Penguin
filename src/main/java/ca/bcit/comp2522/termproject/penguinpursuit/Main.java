@@ -1,21 +1,13 @@
 package ca.bcit.comp2522.termproject.penguinpursuit;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -23,8 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.security.Key;
-import java.util.concurrent.RecursiveAction;
+import java.util.ArrayList;
 
 public class Main extends Application {
     @Override
@@ -102,7 +93,7 @@ public class Main extends Application {
         gameScene.setOnKeyPressed(keyEvent -> {
             switch(keyEvent.getCode()) {
                 case UP:
-                    penguin.jump();
+                    penguin.moveUp();
                     break;
                 case DOWN:
                     penguin.moveDown(scene);
@@ -117,8 +108,8 @@ public class Main extends Application {
                     break;
             }
 
-            penguin.getPenguin().setX(penguin.getxCoordinate());
-            penguin.getPenguin().setY(penguin.getyCoordinate());
+            penguin.getPenguin().setX(penguin.getXCoordinate());
+            penguin.getPenguin().setY(penguin.getYCoordinate());
         });
 
 
@@ -131,6 +122,18 @@ public class Main extends Application {
             stage.setScene(gameScene);
             stage.show();
         });
+
+        ArrayList<Sprite> penguinList = new ArrayList<Sprite>();
+        int penguinCount = 20;
+        for (int i=0; i<penguinCount; i++){
+            Sprite penguins = new Sprite();
+            double x = Math.random() * 400+100;
+            double y = Math.random() * 400+100;
+            penguins.position.set(x, y);
+            penguins.setImage("icon.png");
+            penguinList.add(penguins);
+        }
+//        check if penguin overlaps with platforms
 
         gameRoot.getChildren().add(platformPane);
         gameRoot.getChildren().add(penguinPane);

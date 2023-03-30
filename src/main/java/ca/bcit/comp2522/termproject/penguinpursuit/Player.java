@@ -1,13 +1,8 @@
 package ca.bcit.comp2522.termproject.penguinpursuit;
 
-import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
@@ -43,48 +38,33 @@ public class Player {
         return penguin;
     }
 
-    public Image getCharacter() {
-        return character;
-    }
-
-    Image character = new Image("icon.png");
-
-
-    public int getxCoordinate() {
+    public int getXCoordinate() {
         return xCoordinate;
     }
 
-    public int getyCoordinate() {
+    public int getYCoordinate() {
         return yCoordinate;
     }
 
-    public void jump() {
-        if(getyCoordinate() > 0) {
-            for (int i = 0; i < 10; i++) {
-                yCoordinate -= 1;
-            }
-        }
-    }
-
     public void moveLeft(){
-        if(getxCoordinate() > 0) {
+        if(getXCoordinate() > 0) {
             xCoordinate -= 7;
         }
     }
 
     public void moveRight(Scene scene){
-        if(getxCoordinate() < scene.getWidth() - penguin.getFitWidth()) {
+        if(getXCoordinate() < scene.getWidth() - penguin.getFitWidth()) {
             xCoordinate += 7;
         }
     }
     public void moveUp(){
-        if(getyCoordinate() > 0) {
+        if(getYCoordinate() > 0) {
             yCoordinate -= 7;
         }
     }
 
     public void moveDown(Scene scene){
-        if(getyCoordinate() < scene.getHeight() - penguin.getFitHeight()) {
+        if(getYCoordinate() < scene.getHeight() - penguin.getFitHeight()) {
             yCoordinate += 7;
         }
     }

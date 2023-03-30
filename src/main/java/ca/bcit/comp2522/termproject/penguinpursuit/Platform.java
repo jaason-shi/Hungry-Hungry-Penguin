@@ -29,5 +29,14 @@ public class Platform {
     public ImageView getIcePlatform() {
         return icePlatform;
     }
+
+//    public boolean collisionDetection(Player penguin) {
+//        for (platform: getPlatforms()) {
+//            if (penguin.getBoundsInParent().intersects(platform.getBoundsInParent())) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 }
 

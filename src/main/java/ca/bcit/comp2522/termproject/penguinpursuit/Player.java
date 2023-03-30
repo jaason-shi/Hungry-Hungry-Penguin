@@ -18,7 +18,7 @@ public class Player {
     private ImageView penguin;
 
     public Player(int width, int height, Direction direction) {
-        this.xCoordinate = 25;
+        this.xCoordinate = 50;
         this.yCoordinate = 507;
         this.width = width;
         this.height = height;

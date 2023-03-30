@@ -47,10 +47,12 @@ public class Main extends Application {
         Scene gameScene = new Scene(gameRoot, 800, 600, Color.SKYBLUE);
 
         Platform platform = new Platform();
-        platform.addPlatform(0, 550, 300, 50);
-        platform.addPlatform(320, 450, 150, 50);
-        platform.addPlatform(500, 550, 250, 50);
+        platform.addPlatform(0, 0, 50, 800);
+        platform.addPlatform(0, 0, 800, 50);
+        platform.addPlatform(0, 550, 800, 150);
+        platform.addPlatform(750, 0, 50, 800);
 
+        platform.addPlatform(110, 300, 50, 250);
 
         Pane platformPane = new Pane();
         for (Rectangle rectangle : platform.getPlatforms()) {

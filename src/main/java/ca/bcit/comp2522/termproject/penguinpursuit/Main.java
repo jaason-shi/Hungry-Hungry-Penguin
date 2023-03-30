@@ -67,6 +67,11 @@ public class Main extends Application {
             platformPane.getChildren().add(rectangle);
         }
 
+        Platform icePlatform = new Platform();
+        icePlatform.addPlatform(0, 550, 300, 50);
+        Pane icePlatformPane = new Pane();
+        icePlatformPane.getChildren().add(icePlatform.getIcePlatform());
+
 ////        Canvas canvas = new Canvas(600, 600);
 ////        GraphicsContext context = canvas.getGraphicsContext2D();
 //        Sprite penguin = new Sprite();
@@ -129,6 +134,7 @@ public class Main extends Application {
 
         root2.getChildren().add(platformPane);
         root2.getChildren().add(penguinPane);
+        root2.getChildren().add(icePlatformPane);
 
         root.getChildren().add(text);
         root.getChildren().add(imageView);

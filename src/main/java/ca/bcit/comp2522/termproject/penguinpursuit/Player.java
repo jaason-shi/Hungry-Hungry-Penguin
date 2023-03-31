@@ -1,5 +1,6 @@
 package ca.bcit.comp2522.termproject.penguinpursuit;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -7,7 +8,7 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
-public class Player {
+public class Player extends Rectangle{
     private int xCoordinate;
     private int yCoordinate;
     private int width;
@@ -57,25 +58,38 @@ public class Player {
             xCoordinate += 7;
         }
     }
-    public void moveUp(){
-        if(getYCoordinate() > 0) {
+
+
+    public void moveUp(ArrayList<Platform> platforms) {
+        for (Platform platform : platforms) {
+            if (penguin.getBoundsInParent().intersects(platform.getIcePlatform().getBoundsInParent())) {
+                yCoordinate = (int) (platform.getIcePlatform().getY() + platform.getIcePlatform().getFitHeight());
+                return;
+            }
+        }
+        if (getYCoordinate() > 0) {
             yCoordinate -= 7;
         }
     }
+
+
 
     public void moveDown(Scene scene){
         if(getYCoordinate() < scene.getHeight() - penguin.getFitHeight()) {
             yCoordinate += 7;
         }
     }
+public Rectangle2D getBounds() {
+        return new Rectangle2D(getX(), getY(), getWidth(), getHeight());
+}
 
-    public boolean collisionDetection(ArrayList<Rectangle> obstacles) {
-        for (Rectangle obstacle: obstacles) {
-            if (penguin.getBoundsInParent().intersects(obstacle.getBoundsInParent())) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean collisionDetection(ArrayList<Rectangle> obstacles) {
+//        for (Rectangle obstacle: obstacles) {
+//            if (penguin.getBoundsInParent().intersects(obstacle.getBoundsInParent())) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
 }

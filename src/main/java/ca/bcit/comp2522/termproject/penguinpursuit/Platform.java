@@ -1,12 +1,13 @@
 package ca.bcit.comp2522.termproject.penguinpursuit;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
-public class Platform {
+public class Platform  {
     private ArrayList<Rectangle> platforms = new ArrayList<>();
     private ImageView icePlatform;
 
@@ -28,6 +29,9 @@ public class Platform {
 
     public ImageView getIcePlatform() {
         return icePlatform;
+    }
+    public Rectangle2D getBounds() {
+        return new Rectangle2D(getX(), getY(), getWidth(), getHeight());
     }
 }
 

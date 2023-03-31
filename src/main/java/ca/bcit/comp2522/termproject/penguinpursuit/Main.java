@@ -1,6 +1,7 @@
 package ca.bcit.comp2522.termproject.penguinpursuit;
 
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -46,8 +47,15 @@ public class Main extends Application {
         Group gameRoot = new Group();
         Scene gameScene = new Scene(gameRoot, 800, 600, Color.SKYBLUE);
 
-        Platform platform = new Platform();
-        platform.addPlatform(0, 0, 50, 800);
+        ArrayList<Platform> platformList = new ArrayList<Platform>();
+//        int platformCount = 10;
+//        for (int i=0; i<platformCount; i++){
+//            Platform platforms = new Platform();
+//            platforms.addPlatform(20, 20, 50, 50);
+//            platformList.add(platforms);
+//        }
+//        Platform platform = new Platform();
+        platformList.add(new Platform(0, 0, 50, 800));
         platform.addPlatform(0, 0, 800, 50);
         platform.addPlatform(0, 550, 800, 150);
         platform.addPlatform(750, 0, 50, 800);
@@ -92,10 +100,17 @@ public class Main extends Application {
 //            }
 //        };
 
+
+        private boolean isColliding(Player player, Platform platform){
+            Rectangle2D playerBounds = player.getBounds();
+            Rectangle2D platformBounds = platform.getBounds();
+            return playerBounds.intersects(platformBounds);
+        }
+//        check if penguin overlaps with platforms
         gameScene.setOnKeyPressed(keyEvent -> {
             switch(keyEvent.getCode()) {
                 case UP:
-                    penguin.moveUp();
+                    penguin.moveUp(platformList);
                     break;
                 case DOWN:
                     penguin.moveDown(scene);
@@ -125,17 +140,7 @@ public class Main extends Application {
             stage.show();
         });
 
-        ArrayList<Sprite> penguinList = new ArrayList<Sprite>();
-        int penguinCount = 20;
-        for (int i=0; i<penguinCount; i++){
-            Sprite penguins = new Sprite();
-            double x = Math.random() * 400+100;
-            double y = Math.random() * 400+100;
-            penguins.position.set(x, y);
-            penguins.setImage("icon.png");
-            penguinList.add(penguins);
-        }
-//        check if penguin overlaps with platforms
+
 
         gameRoot.getChildren().add(platformPane);
         gameRoot.getChildren().add(penguinPane);

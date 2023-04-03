@@ -1,5 +1,6 @@
 package ca.bcit.comp2522.termproject.penguinpursuit;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -113,8 +114,27 @@ public class Main extends Application {
 //            gameRoot.getChildren().add(fishPane);
         }
 
+        AnimationTimer gameLoop = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                penguin.render(context);
 
+                penguin.speed.set(0, 0);
 
+                if(inputList.contains("LEFT")) {
+                    penguin.speed.add(-50, 0);
+                }
+                if(inputList.contains("RIGHT")) {
+                    penguin.speed.add(50, 0);
+                }
+                if(inputList.contains("UP")) {
+                    penguin.speed.add(0, -50);
+                }
+                if(inputList.contains("DOWN")) {
+                    penguin.speed.add(0, 50);
+                }
+            }
+        }
 
         gameRoot.getChildren().add(platformPane);
         gameRoot.getChildren().add(penguinPane);

@@ -28,52 +28,49 @@ public class Main extends Application {
 //        Parent root =  FXMLLoader.load(getClass().getResource("hello-view.fxml"));
 //        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
 
-//        Group root = new Group();
-//        Scene scene = new Scene(root, 800, 600, Color.SKYBLUE);
-//        stage.getIcons().add(new Image("icon.png"));
         stage.setTitle("Penguin Pursuit");
-//        stage.setResizable(false);
-//        stage.setScene(scene);
-//
-//        Text text = new Text();
-//        text.setText("Penguin Pursuit");
-//        text.setX(175);
-//        text.setY(140);
-//        text.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
-//        text.setFill(Color.NAVY);
+        stage.getIcons().add(new Image("penguin.png"));
+        stage.setResizable(false);
+
+        Group titleRoot = new Group();
+        Scene titleScene = new Scene(titleRoot, 800, 600, Color.SKYBLUE);
+
+        BorderPane gameRoot = new BorderPane();
+        Scene gameScene = new Scene(gameRoot);
+
+        stage.setScene(titleScene);
+
+        Text text = new Text();
+        text.setText("Penguin Pursuit");
+        text.setX(175);
+        text.setY(140);
+        text.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
+        text.setFill(Color.NAVY);
+
+        Button button = new Button("Start");
+        button.setLayoutX(365);
+        button.setLayoutY(500);
+        button.setPrefWidth(80);
+        button.setPrefHeight(40);
+        button.setOnAction(event -> {
+            stage.setScene(gameScene);
+            stage.show();
+        });
 //
 //        Image image = new Image("icon.png");
 //        ImageView imageView = new ImageView(image);
 //        imageView.setX(290);
 //        imageView.setY(220);
 
-        BorderPane gameRoot = new BorderPane();
-        Scene gameScene = new Scene(gameRoot);
+        titleRoot.getChildren().add(text);
+        titleRoot.getChildren().add(button);
 
-        stage.setScene(gameScene);
         Canvas canvas = new Canvas(800, 600);
         GraphicsContext context = canvas.getGraphicsContext2D();
 
         gameRoot.setCenter(canvas);
         context.setFill(Color.SKYBLUE);
         context.fillRect(0,0,800,600);
-
-
-        Player penguin = new Player(50, 50, Direction.RIGHT);
-        Pane penguinPane = new Pane();
-        penguinPane.getChildren().add(penguin.getPenguin());
-
-
-        ArrayList<Fish> fishList = new ArrayList<>();
-        for (int i = 1; i <= 15; i++) {
-            Fish fish = new Fish(25, 25);
-            fishList.add(fish);
-
-            Pane fishPane = new Pane();
-            fishPane.getChildren().add(fish.getFish());
-            gameRoot.getChildren().add(fishPane);
-        }
-
 
         ArrayList<String> inputList = new ArrayList<>();
 
@@ -93,16 +90,29 @@ public class Main extends Application {
                 }
         );
 
+        Sprite penguin = new Sprite();
+        penguin.position.set(100, 100);
+        penguin.setImage("penguin.png");
 
-        Button button = new Button("Start");
-        button.setLayoutX(365);
-        button.setLayoutY(500);
-        button.setPrefWidth(80);
-        button.setPrefHeight(40);
-        button.setOnAction(event -> {
-            stage.setScene(gameScene);
-            stage.show();
-        });
+//        Player penguin = new Player(50, 50, Direction.RIGHT);
+//        Pane penguinPane = new Pane();
+//        penguinPane.getChildren().add(penguin.getPenguin());
+
+        ArrayList<Sprite> fishList = new ArrayList<>();
+        int fishCount = 30;
+        for (int i = 0; i < fishCount; i++) {
+            Sprite fish = new Sprite();
+            double x = Math.random() * 600 + 100;
+            double y = Math.random() * 400 + 100;
+            fish.position.set(x, y);
+            fish.setImage("fish.png");
+            fishList.add(fish);
+
+//            Pane fishPane = new Pane();
+//            fishPane.getChildren().add(fish.getFish());
+//            gameRoot.getChildren().add(fishPane);
+        }
+
 
 
 

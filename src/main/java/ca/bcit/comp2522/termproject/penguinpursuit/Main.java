@@ -8,6 +8,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -41,7 +42,7 @@ public class Main extends Application {
 
         Text text = new Text();
         text.setText("Hungry Hungry Penguin");
-        text.setX(175);
+        text.setX(70);
         text.setY(140);
         text.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
         text.setFill(Color.NAVY);
@@ -55,25 +56,31 @@ public class Main extends Application {
             stage.setScene(gameScene);
             stage.show();
         });
-//
-//        Image image = new Image("icon.png");
-//        ImageView imageView = new ImageView(image);
-//        imageView.setX(290);
-//        imageView.setY(220);
 
-        Image image = new Image("icon.png");
-        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT,
-                BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        gameRoot.setBackground(new Background(backgroundImage));
+        Image image = new Image("igloo.jpg");
+        ImageView iconImage = new ImageView(image);
+        iconImage.setX(260);
+        iconImage.setY(175);
+
         titleRoot.getChildren().add(text);
         titleRoot.getChildren().add(button);
+        titleRoot.getChildren().add(iconImage);
 
         Canvas canvas = new Canvas(800, 600);
         GraphicsContext context = canvas.getGraphicsContext2D();
 
         gameRoot.setCenter(canvas);
+
         context.setFill(Color.SKYBLUE);
         context.fillRect(0,0,800,600);
+
+//        Image backgroundImage = new Image("background.jpg");
+//        ImageView backgroundImageView = new ImageView(backgroundImage);
+//        backgroundImageView.setFitWidth(800);
+//        backgroundImageView.setFitHeight(600);
+//
+//        gameRoot.getChildren().add(0, backgroundImageView);
+//        gameRoot.setBackground(Background.EMPTY);
 
         ArrayList<String> inputList = new ArrayList<>();
 

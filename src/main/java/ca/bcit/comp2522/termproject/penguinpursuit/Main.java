@@ -36,6 +36,9 @@ public class Main extends Application {
         BorderPane gameRoot = new BorderPane();
         Scene gameScene = new Scene(gameRoot);
 
+        Group endRoot = new Group();
+        Scene endScene = new Scene(endRoot, 800, 600, Color.SKYBLUE);
+
         stage.setScene(titleScene);
 
         Text text = new Text();
@@ -45,13 +48,23 @@ public class Main extends Application {
         text.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
         text.setFill(Color.NAVY);
 
-        Button button = new Button("Start");
-        button.setLayoutX(365);
-        button.setLayoutY(500);
-        button.setPrefWidth(80);
-        button.setPrefHeight(40);
-        button.setOnAction(event -> {
+        Button startButton = new Button("Start");
+        startButton.setLayoutX(365);
+        startButton.setLayoutY(500);
+        startButton.setPrefWidth(80);
+        startButton.setPrefHeight(40);
+        startButton.setOnAction(event -> {
             stage.setScene(gameScene);
+            stage.show();
+        });
+
+        Button playAgainButton = new Button("Play Again");
+        playAgainButton.setLayoutX(365);
+        playAgainButton.setLayoutY(500);
+        playAgainButton.setPrefWidth(80);
+        playAgainButton.setPrefHeight(40);
+        playAgainButton.setOnAction(event -> {
+            stage.setScene(titleScene);
             stage.show();
         });
 
@@ -61,8 +74,10 @@ public class Main extends Application {
         iconImage.setY(175);
 
         titleRoot.getChildren().add(text);
-        titleRoot.getChildren().add(button);
+        titleRoot.getChildren().add(startButton);
         titleRoot.getChildren().add(iconImage);
+
+        endRoot.getChildren().add(playAgainButton);
 
         Canvas canvas = new Canvas(800, 600);
         GraphicsContext context = canvas.getGraphicsContext2D();
@@ -136,27 +151,27 @@ public class Main extends Application {
                 penguin.speed.multiply(1/60.0);
                 penguin.position.add(penguin.speed);
 
-                Random random = new Random();
-                List<Wall> walls = new ArrayList<>();
-                int maxWalls = 10;
-
-                for (int i = 0; i < maxWalls; i++) {
-                    double x = random.nextDouble() * gameScene.getWidth();
-                    double y = random.nextDouble() * gameScene.getHeight();
-
-                    Wall wall = new Wall(x, y, 50, 50);
-                    boolean collision = false;
-                    for (Wall otherWall : walls) {
-                        if (wall.getBoundsInParent().intersects(otherWall.getBoundsInParent())) {
-                            collision = true;
-                            break;
-                        }
-                    }
-                    if (!collision) {
-                        walls.add(wall);
-                        gameRoot.getChildren().add(wall);
-                    }
-                }
+//                Random random = new Random();
+//                List<Wall> walls = new ArrayList<>();
+//                int maxWalls = 10;
+//
+//                for (int i = 0; i < maxWalls; i++) {
+//                    double x = random.nextDouble() * gameScene.getWidth();
+//                    double y = random.nextDouble() * gameScene.getHeight();
+//
+//                    Wall wall = new Wall(x, y, 50, 50);
+//                    boolean collision = false;
+//                    for (Wall otherWall : walls) {
+//                        if (wall.getBoundsInParent().intersects(otherWall.getBoundsInParent())) {
+//                            collision = true;
+//                            break;
+//                        }
+//                    }
+//                    if (!collision) {
+//                        walls.add(wall);
+//                        gameRoot.getChildren().add(wall);
+//                    }
+//                }
 
                 for (int i = 0; i < fishList.size(); i++) {
                     Sprite fish = fishList.get(i);
@@ -181,6 +196,7 @@ public class Main extends Application {
                     context.fillText("Fish Left: " + fishLeft, 25, 40);
                     context.strokeText("Fish Left: " + fishLeft, 25, 40);
                 } else {
+                    stage.setScene(endScene);
                     context.fillText("Penguin finished its meal!", 25, 40);
                     context.strokeText("Penguin finished its meal!", 25, 40);
                 }

@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
-    Sprite penguin = new Sprite();
+//    Sprite penguin = new Sprite();
     ArrayList<Sprite> fishList = new ArrayList<>();
 
     private void resetGame() {
@@ -68,10 +69,12 @@ public class Main extends Application {
 
         Text endingText = new Text();
         endingText.setText("Penguin has finished its meal!");
-        endingText.setX(70);
+        endingText.setX(100);
         endingText.setY(140);
         endingText.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
         endingText.setFill(Color.NAVY);
+        endingText.setWrappingWidth(600);
+        endingText.setTextAlignment(TextAlignment.CENTER);
 
         Button startButton = new Button("Start");
         startButton.setLayoutX(365);
@@ -132,7 +135,7 @@ public class Main extends Application {
                 }
         );
 
-//        Sprite penguin = new Sprite();
+        Sprite penguin = new Sprite();
         penguin.position.set(100, 100);
         penguin.setImage("penguin.png");
 

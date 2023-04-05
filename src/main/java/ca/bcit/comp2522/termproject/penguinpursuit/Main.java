@@ -16,14 +16,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundRepeat;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class Main extends Application {
     @Override
@@ -125,16 +120,16 @@ public class Main extends Application {
 
                 penguin.speed.set(0, 0);
 
-                if(inputList.contains("LEFT") && penguin.position.x > 0) {
+                if(inputList.contains("LEFT") && penguin.position.xCoordinate > 0) {
                     penguin.speed.add(-75, 0);
                 }
-                if(inputList.contains("RIGHT") && penguin.position.x < 800 - penguin.image.getWidth()) {
+                if(inputList.contains("RIGHT") && penguin.position.xCoordinate < 800 - penguin.image.getWidth()) {
                     penguin.speed.add(75, 0);
                 }
-                if(inputList.contains("UP") && penguin.position.y > 0) {
+                if(inputList.contains("UP") && penguin.position.yCoordinate > 0) {
                     penguin.speed.add(0, -75);
                 }
-                if(inputList.contains("DOWN") && penguin.position.y < 600 - penguin.image.getHeight()) {
+                if(inputList.contains("DOWN") && penguin.position.yCoordinate < 600 - penguin.image.getHeight()) {
                     penguin.speed.add(0, 75);
                 }
 

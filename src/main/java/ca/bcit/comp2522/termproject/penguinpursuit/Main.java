@@ -133,19 +133,40 @@ public class Main extends Application {
                 if(inputList.contains("DOWN")) {
                     penguin.speed.add(0, 50);
                 }
+
+                penguin.speed.multiply(1/60.0);
+                penguin.position.add(penguin.speed);
+
+                for (int i = 0; i < fishList.size(); i++) {
+                    Sprite fish = fishList.get(i);
+                    if (penguin.intersects(fish)) {
+                        fishList.remove(i);
+                    }
+                }
+                context.setFill(Color.SKYBLUE);
+                context.fillRect(0,0,800,600);
+
+                for(Sprite fish: fishList) {
+                    fish.render(context);
+                }
+                penguin.render(context);
+
             }
-        }
+        };
 
-        gameRoot.getChildren().add(platformPane);
-        gameRoot.getChildren().add(penguinPane);
-        gameRoot.getChildren().add(icePlatformPane);
-
-        root.getChildren().add(text);
-        root.getChildren().add(imageView);
-        root.getChildren().add(button);
-
-        stage.setScene(scene);
+        gameLoop.start();
         stage.show();
+
+//        gameRoot.getChildren().add(platformPane);
+//        gameRoot.getChildren().add(penguinPane);
+//        gameRoot.getChildren().add(icePlatformPane);
+//
+//        root.getChildren().add(text);
+//        root.getChildren().add(imageView);
+//        root.getChildren().add(button);
+//
+//        stage.setScene(scene);
+//        stage.show();
     }
 
     public static void main(String[] args) {

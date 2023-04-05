@@ -9,7 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -61,6 +61,10 @@ public class Main extends Application {
 //        imageView.setX(290);
 //        imageView.setY(220);
 
+        Image image = new Image("icon.png");
+        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT,
+                BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        gameRoot.setBackground(new Background(backgroundImage));
         titleRoot.getChildren().add(text);
         titleRoot.getChildren().add(button);
 
@@ -130,8 +134,8 @@ public class Main extends Application {
                 Random random = new Random();
                 List<Wall> walls = new ArrayList<>();
                 int maxWalls = 10;
-                int numWalls = 0;
-                while (numWalls < maxWalls ) {
+
+                for (int i = 0; i < maxWalls; i++) {
                     double x = random.nextDouble() * gameScene.getWidth();
                     double y = random.nextDouble() * gameScene.getHeight();
 
@@ -146,7 +150,6 @@ public class Main extends Application {
                     if (!collision) {
                         walls.add(wall);
                         gameRoot.getChildren().add(wall);
-                        numWalls++;
                     }
                 }
 

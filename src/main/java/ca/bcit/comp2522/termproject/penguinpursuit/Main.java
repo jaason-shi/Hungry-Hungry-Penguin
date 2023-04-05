@@ -21,6 +21,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main extends Application {
+
+    Sprite penguin = new Sprite();
+    ArrayList<Sprite> fishList = new ArrayList<>();
+
+    private void resetGame() {
+//        penguin.position.set(100, 100);
+        fishList.clear();
+        int fishCount = 30;
+        for (int i = 0; i < fishCount; i++) {
+            Sprite fish = new Sprite();
+            double x = Math.random() * 600 + 100;
+            double y = Math.random() * 400 + 100;
+            fish.position.set(x, y);
+            fish.setImage("fish.png");
+            fishList.add(fish);
+        }
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
 //        Parent root =  FXMLLoader.load(getClass().getResource("hello-view.fxml"));
@@ -71,7 +89,8 @@ public class Main extends Application {
         playAgainButton.setPrefWidth(80);
         playAgainButton.setPrefHeight(40);
         playAgainButton.setOnAction(event -> {
-            stage.setScene(titleScene);
+            resetGame();
+            stage.setScene(gameScene);
             stage.show();
         });
 
@@ -95,14 +114,6 @@ public class Main extends Application {
         context.setFill(Color.SKYBLUE);
         context.fillRect(0,0,800,600);
 
-//        Image backgroundImage = new Image("background.jpg");
-//        ImageView backgroundImageView = new ImageView(backgroundImage);
-//        backgroundImageView.setFitWidth(800);
-//        backgroundImageView.setFitHeight(600);
-//
-//        gameRoot.getChildren().add(0, backgroundImageView);
-//        gameRoot.setBackground(Background.EMPTY);
-
         ArrayList<String> inputList = new ArrayList<>();
 
         gameScene.setOnKeyPressed(
@@ -121,20 +132,20 @@ public class Main extends Application {
                 }
         );
 
-        Sprite penguin = new Sprite();
+//        Sprite penguin = new Sprite();
         penguin.position.set(100, 100);
         penguin.setImage("penguin.png");
 
-        Sprite enemy = new Sprite();
-        enemy.setImage("fish.png");
+//        Sprite enemy = new Sprite();
+//        enemy.setImage("fish.png");
+//
+//        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(16), event -> {
+//            enemy.position.set(Math.random() * 600 + 100, Math.random() * 400 + 100);
+//        }));
+//        timeline.setCycleCount(Timeline.INDEFINITE);
+//        timeline.play();
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(16), event -> {
-            enemy.position.set(Math.random() * 600 + 100, Math.random() * 400 + 100);
-        }));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
-
-        ArrayList<Sprite> fishList = new ArrayList<>();
+//        ArrayList<Sprite> fishList = new ArrayList<>();
         int fishCount = 30;
         for (int i = 0; i < fishCount; i++) {
             Sprite fish = new Sprite();
@@ -168,28 +179,6 @@ public class Main extends Application {
                 penguin.speed.multiply(1/60.0);
                 penguin.position.add(penguin.speed);
 
-//                Random random = new Random();
-//                List<Wall> walls = new ArrayList<>();
-//                int maxWalls = 10;
-//
-//                for (int i = 0; i < maxWalls; i++) {
-//                    double x = random.nextDouble() * gameScene.getWidth();
-//                    double y = random.nextDouble() * gameScene.getHeight();
-//
-//                    Wall wall = new Wall(x, y, 50, 50);
-//                    boolean collision = false;
-//                    for (Wall otherWall : walls) {
-//                        if (wall.getBoundsInParent().intersects(otherWall.getBoundsInParent())) {
-//                            collision = true;
-//                            break;
-//                        }
-//                    }
-//                    if (!collision) {
-//                        walls.add(wall);
-//                        gameRoot.getChildren().add(wall);
-//                    }
-//                }
-
                 for (int i = 0; i < fishList.size(); i++) {
                     Sprite fish = fishList.get(i);
                     if (penguin.intersects(fish)) {
@@ -216,6 +205,7 @@ public class Main extends Application {
                     stage.setScene(endScene);
                 }
             }
+
         };
         gameLoop.start();
         stage.show();

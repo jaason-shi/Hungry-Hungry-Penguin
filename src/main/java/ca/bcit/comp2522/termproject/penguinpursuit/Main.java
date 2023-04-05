@@ -8,13 +8,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -95,10 +91,6 @@ public class Main extends Application {
         penguin.position.set(100, 100);
         penguin.setImage("penguin.png");
 
-//        Player penguin = new Player(50, 50, Direction.RIGHT);
-//        Pane penguinPane = new Pane();
-//        penguinPane.getChildren().add(penguin.getPenguin());
-
         ArrayList<Sprite> fishList = new ArrayList<>();
         int fishCount = 30;
         for (int i = 0; i < fishCount; i++) {
@@ -108,10 +100,6 @@ public class Main extends Application {
             fish.position.set(x, y);
             fish.setImage("fish.png");
             fishList.add(fish);
-
-//            Pane fishPane = new Pane();
-//            fishPane.getChildren().add(fish.getFish());
-//            gameRoot.getChildren().add(fishPane);
         }
 
         AnimationTimer gameLoop = new AnimationTimer() {
@@ -165,20 +153,8 @@ public class Main extends Application {
                 }
             }
         };
-
         gameLoop.start();
         stage.show();
-
-//        gameRoot.getChildren().add(platformPane);
-//        gameRoot.getChildren().add(penguinPane);
-//        gameRoot.getChildren().add(icePlatformPane);
-//
-//        root.getChildren().add(text);
-//        root.getChildren().add(imageView);
-//        root.getChildren().add(button);
-//
-//        stage.setScene(scene);
-//        stage.show();
     }
 
     public static void main(String[] args) {

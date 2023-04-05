@@ -1,6 +1,5 @@
 package ca.bcit.comp2522.termproject.penguinpursuit;
 
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.canvas.GraphicsContext;
 

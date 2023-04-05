@@ -29,7 +29,7 @@ public class Sprite {
     }
 
     public boolean intersects(Sprite other) {
-        return getBoundary().intersects(other.getBoundary());
+        return this.getBoundary().intersects(other.getBoundary());
     }
 
     public void render(GraphicsContext context) {

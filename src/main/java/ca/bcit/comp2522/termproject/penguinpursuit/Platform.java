@@ -30,8 +30,8 @@ public class Platform  {
     public ImageView getIcePlatform() {
         return icePlatform;
     }
-    public Rectangle2D getBounds() {
-        return new Rectangle2D(getX(), getY(), getWidth(), getHeight());
-    }
+//    public Rectangle2D getBounds() {
+//        return new Rectangle2D(getX(), getY(), getWidth(), getHeight());
+//    }
 }
 

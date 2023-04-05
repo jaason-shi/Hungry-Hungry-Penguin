@@ -22,8 +22,8 @@ public class Sprite {
     }
 
     public Rectangle getBoundary() {
-        boundary.x = position.x;
-        boundary.y = position.y;
+        boundary.xCoordinate = position.xCoordinate;
+        boundary.yCoordinate = position.yCoordinate;
         return boundary;
     }
 
@@ -32,6 +32,6 @@ public class Sprite {
     }
 
     public void render(GraphicsContext context) {
-        context.drawImage(image, position.x, position.y);
+        context.drawImage(image, position.xCoordinate, position.yCoordinate);
     }
 }

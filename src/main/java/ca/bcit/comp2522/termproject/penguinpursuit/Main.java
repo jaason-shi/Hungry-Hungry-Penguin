@@ -41,12 +41,19 @@ public class Main extends Application {
 
         stage.setScene(titleScene);
 
-        Text text = new Text();
-        text.setText("Hungry Hungry Penguin");
-        text.setX(70);
-        text.setY(140);
-        text.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
-        text.setFill(Color.NAVY);
+        Text titleText = new Text();
+        titleText.setText("Hungry Hungry Penguin");
+        titleText.setX(70);
+        titleText.setY(140);
+        titleText.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
+        titleText.setFill(Color.NAVY);
+
+        Text endingText = new Text();
+        endingText.setText("Penguin has finished its meal!");
+        endingText.setX(70);
+        endingText.setY(140);
+        endingText.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
+        endingText.setFill(Color.NAVY);
 
         Button startButton = new Button("Start");
         startButton.setLayoutX(365);
@@ -73,10 +80,11 @@ public class Main extends Application {
         iconImage.setX(260);
         iconImage.setY(175);
 
-        titleRoot.getChildren().add(text);
+        titleRoot.getChildren().add(titleText);
         titleRoot.getChildren().add(startButton);
         titleRoot.getChildren().add(iconImage);
 
+        endRoot.getChildren().add(endingText);
         endRoot.getChildren().add(playAgainButton);
 
         Canvas canvas = new Canvas(800, 600);
@@ -116,6 +124,15 @@ public class Main extends Application {
         Sprite penguin = new Sprite();
         penguin.position.set(100, 100);
         penguin.setImage("penguin.png");
+
+        Sprite enemy = new Sprite();
+        enemy.setImage("fish.png");
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(16), event -> {
+            enemy.position.set(Math.random() * 600 + 100, Math.random() * 400 + 100);
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
 
         ArrayList<Sprite> fishList = new ArrayList<>();
         int fishCount = 30;
@@ -197,8 +214,6 @@ public class Main extends Application {
                     context.strokeText("Fish Left: " + fishLeft, 25, 40);
                 } else {
                     stage.setScene(endScene);
-                    context.fillText("Penguin finished its meal!", 25, 40);
-                    context.strokeText("Penguin finished its meal!", 25, 40);
                 }
             }
         };

@@ -25,18 +25,30 @@ public class Main extends Application {
 
 //    Sprite penguin = new Sprite();
     ArrayList<Sprite> fishList = new ArrayList<>();
-
+    ArrayList<Sprite> wallList = new ArrayList<>();
+    int verticalWallCount = 5;
+    int horizontalWallCount = 5;
+    int fishCount = 30;
     private void resetGame() {
 //        penguin.position.set(100, 100);
         fishList.clear();
-        int fishCount = 30;
+        wallList.clear();
         for (int i = 0; i < fishCount; i++) {
             Sprite fish = new Sprite();
-            double x = Math.random() * 600 + 100;
-            double y = Math.random() * 400 + 100;
-            fish.position.set(x, y);
             fish.setImage("fish.png");
+            do {
+                double x = Math.random() * 600 + 100;
+                double y = Math.random() * 400 + 100;
+                fish.position.set(x, y);
+            } while (fish.intersectsAny(wallList));
             fishList.add(fish);
+        }
+
+        for (int i = 0; i < verticalWallCount; i++) {
+            Sprite wall = new Sprite();
+            wall.setImage("ice-platform-horizontal.png");
+            wall.position.set(400,400);
+            wallList.add(wall);
         }
     }
 
@@ -148,16 +160,38 @@ public class Main extends Application {
 //        timeline.setCycleCount(Timeline.INDEFINITE);
 //        timeline.play();
 
-//        ArrayList<Sprite> fishList = new ArrayList<>();
-        int fishCount = 30;
+        for (int i = 0; i < verticalWallCount; i++) {
+            Sprite wall = new Sprite();
+            wall.setImage("ice-platform-vertical.png");
+            do {
+                double x = Math.random() * 600 + 100;
+                double y = Math.random() * 400 + 100;
+                wall.position.set(x, y);
+            } while (wall.intersectsAny(wallList) || wall.intersects(penguin) || wall.intersectsAny(fishList));
+            wallList.add(wall);
+        }
+
+        for (int i = 0; i < horizontalWallCount; i++) {
+            Sprite wall = new Sprite();
+            wall.setImage("ice-platform-horizontal.png");
+            do {
+                double x = Math.random() * 600 + 100;
+                double y = Math.random() * 400 + 100;
+                wall.position.set(x, y);
+            } while (wall.intersectsAny(wallList) || wall.intersects(penguin) || wall.intersectsAny(fishList));
+            wallList.add(wall);
+        }
+
         for (int i = 0; i < fishCount; i++) {
             Sprite fish = new Sprite();
-            double x = Math.random() * 600 + 100;
-            double y = Math.random() * 400 + 100;
-            fish.position.set(x, y);
             fish.setImage("fish.png");
+            do {
+                double x = Math.random() * 600 + 100;
+                double y = Math.random() * 400 + 100;
+                fish.position.set(x, y);
+            } while (fish.intersectsAny(wallList) || fish.intersectsAny(fishList) || fish.intersects(penguin));
             fishList.add(fish);
-        }
+            }
 
         AnimationTimer gameLoop = new AnimationTimer() {
             @Override
@@ -188,12 +222,24 @@ public class Main extends Application {
                         fishList.remove(i);
                     }
                 }
+
+                for (int i = 0; i < wallList.size(); i++) {
+                    Sprite wall = wallList.get(i);
+                    if (penguin.intersects(wall)) {
+                        penguin.position.set(penguin.position.xCoordinate - penguin.speed.xCoordinate, penguin.position.yCoordinate - penguin.speed.yCoordinate);
+                    }
+                }
                 context.setFill(Color.SKYBLUE);
                 context.fillRect(0,0,800,600);
 
                 for(Sprite fish: fishList) {
                     fish.render(context);
                 }
+
+                for(Sprite wall: wallList) {
+                    wall.render(context);
+                }
+
                 penguin.render(context);
 
                 int fishLeft = fishList.size();

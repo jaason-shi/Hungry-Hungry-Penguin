@@ -14,7 +14,7 @@ public class Rectangle {
     }
 
 //  four cases; left of other rect, right of other rect, above other rect, below other rect
-    public boolean overlaps(Rectangle other) {
+    public boolean intersects(Rectangle other) {
         boolean noOverlap = this.x + this.width < other.x ||
                 other.x + other.width < this.x ||
                 this.y + this.height < other.y ||

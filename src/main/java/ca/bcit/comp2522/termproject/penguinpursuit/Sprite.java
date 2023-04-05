@@ -3,6 +3,8 @@ package ca.bcit.comp2522.termproject.penguinpursuit;
 import javafx.scene.image.Image;
 import javafx.scene.canvas.GraphicsContext;
 
+import java.util.ArrayList;
+
 public class Sprite {
     public Vector position;
     public Vector speed;
@@ -33,5 +35,14 @@ public class Sprite {
 
     public void render(GraphicsContext context) {
         context.drawImage(image, position.xCoordinate, position.yCoordinate);
+    }
+
+    public boolean intersectsAny(ArrayList<Sprite> others) {
+        for (Sprite other : others) {
+            if (this.intersects(other)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

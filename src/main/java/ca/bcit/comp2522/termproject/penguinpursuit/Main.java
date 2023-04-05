@@ -34,22 +34,37 @@ public class Main extends Application {
         inputList.clear();
         fishList.clear();
         wallList.clear();
+        for (int i = 0; i < verticalWallCount; i++) {
+            Sprite wall = new Sprite();
+            wall.setImage("ice-platform-vertical.png");
+            do {
+                double x = Math.random() * 600 + 100;
+                double y = Math.random() * 400 + 100;
+                wall.position.set(x, y);
+            } while (wall.intersectsAny(wallList) || wall.intersects(penguin) || wall.intersectsAny(fishList));
+            wallList.add(wall);
+        }
+
+        for (int i = 0; i < horizontalWallCount; i++) {
+            Sprite wall = new Sprite();
+            wall.setImage("ice-platform-horizontal.png");
+            do {
+                double x = Math.random() * 600 + 100;
+                double y = Math.random() * 400 + 100;
+                wall.position.set(x, y);
+            } while (wall.intersectsAny(wallList) || wall.intersects(penguin) || wall.intersectsAny(fishList));
+            wallList.add(wall);
+        }
+
         for (int i = 0; i < fishCount; i++) {
             Sprite fish = new Sprite();
-            fish.setImage("fish.png");
+            fish.setImage("fish-small.png");
             do {
                 double x = Math.random() * 600 + 100;
                 double y = Math.random() * 400 + 100;
                 fish.position.set(x, y);
-            } while (fish.intersectsAny(wallList));
+            } while (fish.intersectsAny(wallList) || fish.intersectsAny(fishList) || fish.intersects(penguin));
             fishList.add(fish);
-        }
-
-        for (int i = 0; i < verticalWallCount; i++) {
-            Sprite wall = new Sprite();
-            wall.setImage("ice-platform-horizontal.png");
-            wall.position.set(400,400);
-            wallList.add(wall);
         }
     }
 
@@ -58,7 +73,7 @@ public class Main extends Application {
 //        Parent root =  FXMLLoader.load(getClass().getResource("hello-view.fxml"));
 //        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
 
-        stage.setTitle("Penguin Pursuit");
+        stage.setTitle("Hungry Hungry Penguin");
         stage.getIcons().add(new Image("penguin.png"));
         stage.setResizable(false);
 
@@ -148,7 +163,7 @@ public class Main extends Application {
 
         Sprite penguin = new Sprite();
         penguin.position.set(100, 100);
-        penguin.setImage("penguin.png");
+        penguin.setImage("penguin-small.png");
 
 //        Sprite enemy = new Sprite();
 //        enemy.setImage("fish.png");
@@ -183,7 +198,7 @@ public class Main extends Application {
 
         for (int i = 0; i < fishCount; i++) {
             Sprite fish = new Sprite();
-            fish.setImage("fish.png");
+            fish.setImage("fish-small.png");
             do {
                 double x = Math.random() * 600 + 100;
                 double y = Math.random() * 400 + 100;

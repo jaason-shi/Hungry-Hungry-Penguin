@@ -23,14 +23,15 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
-//    Sprite penguin = new Sprite();
+    Sprite penguin = new Sprite();
     ArrayList<Sprite> fishList = new ArrayList<>();
     ArrayList<Sprite> wallList = new ArrayList<>();
+    ArrayList<String> inputList = new ArrayList<>();
     int verticalWallCount = 5;
     int horizontalWallCount = 5;
     int fishCount = 30;
     private void resetGame() {
-//        penguin.position.set(100, 100);
+        inputList.clear();
         fishList.clear();
         wallList.clear();
         for (int i = 0; i < fishCount; i++) {
@@ -128,8 +129,6 @@ public class Main extends Application {
 
         context.setFill(Color.SKYBLUE);
         context.fillRect(0,0,800,600);
-
-        ArrayList<String> inputList = new ArrayList<>();
 
         gameScene.setOnKeyPressed(
                 (KeyEvent event) -> {

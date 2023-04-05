@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Main extends Application {
     @Override
@@ -38,7 +40,7 @@ public class Main extends Application {
         stage.setScene(titleScene);
 
         Text text = new Text();
-        text.setText("Penguin Pursuit");
+        text.setText("Hungry Hungry Penguin");
         text.setX(175);
         text.setY(140);
         text.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
@@ -124,6 +126,29 @@ public class Main extends Application {
 
                 penguin.speed.multiply(1/60.0);
                 penguin.position.add(penguin.speed);
+
+                Random random = new Random();
+                List<Wall> walls = new ArrayList<>();
+                int maxWalls = 10;
+                int numWalls = 0;
+                while (numWalls < maxWalls ) {
+                    double x = random.nextDouble() * gameScene.getWidth();
+                    double y = random.nextDouble() * gameScene.getHeight();
+
+                    Wall wall = new Wall(x, y, 50, 50);
+                    boolean collision = false;
+                    for (Wall otherWall : walls) {
+                        if (wall.getBoundsInParent().intersects(otherWall.getBoundsInParent())) {
+                            collision = true;
+                            break;
+                        }
+                    }
+                    if (!collision) {
+                        walls.add(wall);
+                        gameRoot.getChildren().add(wall);
+                        numWalls++;
+                    }
+                }
 
                 for (int i = 0; i < fishList.size(); i++) {
                     Sprite fish = fishList.get(i);

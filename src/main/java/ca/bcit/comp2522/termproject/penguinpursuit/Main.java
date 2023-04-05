@@ -151,6 +151,18 @@ public class Main extends Application {
                 }
                 penguin.render(context);
 
+                int fishLeft = fishList.size();
+                context.setFont(new Font("Verdana", 36));
+                context.setLineWidth(2);
+                context.setFill(Color.BLACK);
+                context.setStroke(Color.BLACK);
+                if(fishLeft > 0) {
+                    context.fillText("Fish Left: " + fishLeft, 25, 40);
+                    context.strokeText("Fish Left: " + fishLeft, 25, 40);
+                } else {
+                    context.fillText("Penguin finished its meal!", 25, 40);
+                    context.strokeText("Penguin finished its meal!", 25, 40);
+                }
             }
         };
 

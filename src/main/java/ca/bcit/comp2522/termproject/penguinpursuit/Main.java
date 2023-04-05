@@ -8,13 +8,17 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundRepeat;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,7 +45,7 @@ public class Main extends Application {
 
         Text text = new Text();
         text.setText("Hungry Hungry Penguin");
-        text.setX(175);
+        text.setX(70);
         text.setY(140);
         text.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
         text.setFill(Color.NAVY);
@@ -55,21 +59,31 @@ public class Main extends Application {
             stage.setScene(gameScene);
             stage.show();
         });
-//
-//        Image image = new Image("icon.png");
-//        ImageView imageView = new ImageView(image);
-//        imageView.setX(290);
-//        imageView.setY(220);
+
+        Image image = new Image("igloo.jpg");
+        ImageView iconImage = new ImageView(image);
+        iconImage.setX(260);
+        iconImage.setY(175);
 
         titleRoot.getChildren().add(text);
         titleRoot.getChildren().add(button);
+        titleRoot.getChildren().add(iconImage);
 
         Canvas canvas = new Canvas(800, 600);
         GraphicsContext context = canvas.getGraphicsContext2D();
 
         gameRoot.setCenter(canvas);
+
         context.setFill(Color.SKYBLUE);
         context.fillRect(0,0,800,600);
+
+//        Image backgroundImage = new Image("background.jpg");
+//        ImageView backgroundImageView = new ImageView(backgroundImage);
+//        backgroundImageView.setFitWidth(800);
+//        backgroundImageView.setFitHeight(600);
+//
+//        gameRoot.getChildren().add(0, backgroundImageView);
+//        gameRoot.setBackground(Background.EMPTY);
 
         ArrayList<String> inputList = new ArrayList<>();
 
@@ -127,28 +141,28 @@ public class Main extends Application {
                 penguin.speed.multiply(1/60.0);
                 penguin.position.add(penguin.speed);
 
-                Random random = new Random();
-                List<Wall> walls = new ArrayList<>();
-                int maxWalls = 10;
-                int numWalls = 0;
-                while (numWalls < maxWalls ) {
-                    double x = random.nextDouble() * gameScene.getWidth();
-                    double y = random.nextDouble() * gameScene.getHeight();
-
-                    Wall wall = new Wall(x, y, 50, 50);
-                    boolean collision = false;
-                    for (Wall otherWall : walls) {
-                        if (wall.getBoundsInParent().intersects(otherWall.getBoundsInParent())) {
-                            collision = true;
-                            break;
-                        }
-                    }
-                    if (!collision) {
-                        walls.add(wall);
-                        gameRoot.getChildren().add(wall);
-                        numWalls++;
-                    }
-                }
+//                Random random = new Random();
+//                List<Wall> walls = new ArrayList<>();
+//                int maxWalls = 10;
+//                int numWalls = 0;
+//                while (numWalls < maxWalls ) {
+//                    double x = random.nextDouble() * gameScene.getWidth();
+//                    double y = random.nextDouble() * gameScene.getHeight();
+//
+//                    Wall wall = new Wall(x, y, 50, 50);
+//                    boolean collision = false;
+//                    for (Wall otherWall : walls) {
+//                        if (wall.getBoundsInParent().intersects(otherWall.getBoundsInParent())) {
+//                            collision = true;
+//                            break;
+//                        }
+//                    }
+//                    if (!collision) {
+//                        walls.add(wall);
+//                        gameRoot.getChildren().add(wall);
+//                        numWalls++;
+//                    }
+//                }
 
                 for (int i = 0; i < fishList.size(); i++) {
                     Sprite fish = fishList.get(i);

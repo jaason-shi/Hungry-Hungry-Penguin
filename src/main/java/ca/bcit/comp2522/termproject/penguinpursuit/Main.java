@@ -110,16 +110,16 @@ public class Main extends Application {
                 penguin.speed.set(0, 0);
 
                 if(inputList.contains("LEFT")) {
-                    penguin.speed.add(-50, 0);
+                    penguin.speed.add(-75, 0);
                 }
                 if(inputList.contains("RIGHT")) {
-                    penguin.speed.add(50, 0);
+                    penguin.speed.add(75, 0);
                 }
                 if(inputList.contains("UP")) {
-                    penguin.speed.add(0, -50);
+                    penguin.speed.add(0, -75);
                 }
                 if(inputList.contains("DOWN")) {
-                    penguin.speed.add(0, 50);
+                    penguin.speed.add(0, 75);
                 }
 
                 penguin.speed.multiply(1/60.0);

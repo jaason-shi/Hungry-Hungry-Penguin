@@ -136,6 +136,17 @@ public class Main extends Application {
             stage.show();
         });
 
+        Button resetButton = new Button("Reset");
+        resetButton.setLayoutX(365);
+        resetButton.setLayoutY(500);
+        resetButton.setPrefWidth(80);
+        resetButton.setPrefHeight(40);
+        resetButton.setOnAction(event -> {
+            resetGame();
+            stage.setScene(gameScene);
+            stage.show();
+        });
+
         Image startImage = new Image("igloo.jpg");
         ImageView iconStartImage = new ImageView(startImage);
         iconStartImage.setX(260);
@@ -144,6 +155,8 @@ public class Main extends Application {
         titleRoot.getChildren().add(titleText);
         titleRoot.getChildren().add(startButton);
         titleRoot.getChildren().add(iconStartImage);
+
+        gameRoot.getChildren().add(resetButton);
 
         Image endImage = new Image("full-penguin.png");
         ImageView iconEndImage = new ImageView(endImage);

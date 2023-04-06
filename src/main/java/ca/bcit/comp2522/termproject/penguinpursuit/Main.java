@@ -2,6 +2,7 @@ package ca.bcit.comp2522.termproject.penguinpursuit;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -89,7 +90,13 @@ public class Main extends Application {
 
         BorderPane gameRoot = new BorderPane();
         gameRoot.setTop(timerLabel);
-        Scene gameScene = new Scene(gameRoot);
+//        Scene gameScene = new Scene(gameRoot);
+
+        VBox vBox = new VBox();
+        vBox.setAlignment(Pos.TOP_RIGHT);
+        vBox.getChildren().addAll(timerLabel, gameRoot);
+        Scene gameScene = new Scene(vBox, 800, 600);
+
 
         Group endRoot = new Group();
         Scene endScene = new Scene(endRoot, 800, 600, Color.SKYBLUE);

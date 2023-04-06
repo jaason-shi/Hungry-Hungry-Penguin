@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -27,10 +28,12 @@ public class Main extends Application {
     ArrayList<Sprite> fishList = new ArrayList<>();
     ArrayList<Sprite> wallList = new ArrayList<>();
     ArrayList<String> inputList = new ArrayList<>();
-    int verticalWallCount = 5;
-    int horizontalWallCount = 5;
+    int verticalWallCount = 4;
+    int horizontalWallCount = 4;
     int fishCount = 30;
+    Timer gameTimer;
     private void resetGame() {
+        gameTimer.resetTimer();
         penguin.position.set(100, 100);
         inputList.clear();
         fishList.clear();
@@ -74,6 +77,9 @@ public class Main extends Application {
 //        Parent root =  FXMLLoader.load(getClass().getResource("hello-view.fxml"));
 //        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
 
+        Label timerLabel = new Label("00:00");
+        gameTimer = new Timer(timerLabel);
+
         stage.setTitle("Hungry Hungry Penguin");
         stage.getIcons().add(new Image("penguin.png"));
         stage.setResizable(false);
@@ -82,6 +88,7 @@ public class Main extends Application {
         Scene titleScene = new Scene(titleRoot, 800, 600, Color.SKYBLUE);
 
         BorderPane gameRoot = new BorderPane();
+        gameRoot.setTop(timerLabel);
         Scene gameScene = new Scene(gameRoot);
 
         Group endRoot = new Group();
@@ -97,10 +104,9 @@ public class Main extends Application {
         titleText.setFill(Color.NAVY);
 
         Text endingText = new Text();
-        endingText.setText("Penguin has finished its meal!");
         endingText.setX(100);
-        endingText.setY(140);
-        endingText.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
+        endingText.setY(130);
+        endingText.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
         endingText.setFill(Color.NAVY);
         endingText.setWrappingWidth(600);
         endingText.setTextAlignment(TextAlignment.CENTER);
@@ -172,15 +178,6 @@ public class Main extends Application {
         penguin.position.set(100, 100);
         penguin.setImage("penguin-small.png");
 
-//        Sprite enemy = new Sprite();
-//        enemy.setImage("fish.png");
-//
-//        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(16), event -> {
-//            enemy.position.set(Math.random() * 600 + 100, Math.random() * 400 + 100);
-//        }));
-//        timeline.setCycleCount(Timeline.INDEFINITE);
-//        timeline.play();
-
         for (int i = 0; i < verticalWallCount; i++) {
             Sprite wall = new Sprite();
             wall.setImage("ice-platform-vertical.png");
@@ -218,6 +215,8 @@ public class Main extends Application {
             @Override
             public void handle(long now) {
                 penguin.render(context);
+
+                gameTimer.startTimer();
 
                 penguin.speed.set(0, 0);
 
@@ -272,6 +271,9 @@ public class Main extends Application {
                     context.fillText("Fish Left: " + fishLeft, 25, 40);
                     context.strokeText("Fish Left: " + fishLeft, 25, 40);
                 } else {
+                    gameTimer.stopTimer();
+                    int secondsElapsed = gameTimer.getSecondsElapsed();
+                    endingText.setText("Mr. Penguin has collected all the fish! He got it all in " + secondsElapsed + " seconds!");
                     stage.setScene(endScene);
                 }
             }

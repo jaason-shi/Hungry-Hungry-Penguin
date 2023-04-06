@@ -78,25 +78,22 @@ public class Main extends Application {
 //        Parent root =  FXMLLoader.load(getClass().getResource("hello-view.fxml"));
 //        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
 
-        Label timerLabel = new Label("00:00");
-        gameTimer = new Timer(timerLabel);
-
         stage.setTitle("Hungry Hungry Penguin");
         stage.getIcons().add(new Image("penguin.png"));
         stage.setResizable(false);
 
         Group titleRoot = new Group();
         Scene titleScene = new Scene(titleRoot, 800, 600, Color.SKYBLUE);
+        Label timerLabel = new Label("00:00");
+        gameTimer = new Timer(timerLabel);
 
         BorderPane gameRoot = new BorderPane();
-        gameRoot.setTop(timerLabel);
-//        Scene gameScene = new Scene(gameRoot);
 
-        VBox vBox = new VBox();
-        vBox.setAlignment(Pos.TOP_RIGHT);
-        vBox.getChildren().addAll(timerLabel, gameRoot);
-        Scene gameScene = new Scene(vBox, 800, 600);
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().addAll(gameRoot, timerLabel);
+        StackPane.setAlignment(timerLabel, Pos.TOP_RIGHT);
 
+        Scene gameScene = new Scene(stackPane, 800, 600);
 
         Group endRoot = new Group();
         Scene endScene = new Scene(endRoot, 800, 600, Color.SKYBLUE);
@@ -230,13 +227,13 @@ public class Main extends Application {
                 if(inputList.contains("LEFT") && penguin.position.xCoordinate > 0) {
                     penguin.speed.add(-75, 0);
                 }
-                if(inputList.contains("RIGHT") && penguin.position.xCoordinate < 800 - penguin.image.getWidth()) {
+                if(inputList.contains("RIGHT") && penguin.position.xCoordinate < gameScene.getWidth() - penguin.image.getWidth()) {
                     penguin.speed.add(75, 0);
                 }
                 if(inputList.contains("UP") && penguin.position.yCoordinate > 0) {
                     penguin.speed.add(0, -75);
                 }
-                if(inputList.contains("DOWN") && penguin.position.yCoordinate < 600 - penguin.image.getHeight()) {
+                if(inputList.contains("DOWN") && penguin.position.yCoordinate < gameScene.getHeight() - penguin.image.getHeight()) {
                     penguin.speed.add(0, 75);
                 }
 

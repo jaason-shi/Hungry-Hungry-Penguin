@@ -84,16 +84,17 @@ public class Main extends Application {
 
         Group titleRoot = new Group();
         Scene titleScene = new Scene(titleRoot, 800, 600, Color.SKYBLUE);
-        Label timerLabel = new Label("00:00");
-        gameTimer = new Timer(timerLabel);
+
+        Group instructionRoot = new Group();
+        Scene instructionScene = new Scene(instructionRoot, 800, 600, Color.SKYBLUE);
 
         BorderPane gameRoot = new BorderPane();
-
         StackPane stackPane = new StackPane();
+        Scene gameScene = new Scene(stackPane, 800, 600);
+        Label timerLabel = new Label("00:00");
+        gameTimer = new Timer(timerLabel);
         stackPane.getChildren().addAll(gameRoot, timerLabel);
         StackPane.setAlignment(timerLabel, Pos.TOP_RIGHT);
-
-        Scene gameScene = new Scene(stackPane, 800, 600);
 
         Group endRoot = new Group();
         Scene endScene = new Scene(endRoot, 800, 600, Color.SKYBLUE);
@@ -121,7 +122,7 @@ public class Main extends Application {
         startButton.setPrefWidth(80);
         startButton.setPrefHeight(40);
         startButton.setOnAction(event -> {
-            stage.setScene(gameScene);
+            stage.setScene(instructionScene);
             stage.show();
         });
 
@@ -131,21 +132,19 @@ public class Main extends Application {
         playAgainButton.setPrefWidth(80);
         playAgainButton.setPrefHeight(40);
         playAgainButton.setOnAction(event -> {
-            resetGame();
             stage.setScene(gameScene);
             stage.show();
         });
 
-//        Button resetButton = new Button("Reset");
-//        resetButton.setLayoutX(365);
-//        resetButton.setLayoutY(500);
-//        resetButton.setPrefWidth(80);
-//        resetButton.setPrefHeight(40);
-//        resetButton.setOnAction(event -> {
-//            resetGame();
-//            stage.setScene(gameScene);
-//            stage.show();
-//        });
+        Button playButton = new Button("Play");
+        playButton.setLayoutX(365);
+        playButton.setLayoutY(500);
+        playButton.setPrefWidth(80);
+        playButton.setPrefHeight(40);
+        playButton.setOnAction(event -> {
+            stage.setScene(gameScene);
+            stage.show();
+        });
 
         Image startImage = new Image("igloo.jpg");
         ImageView iconStartImage = new ImageView(startImage);
@@ -156,7 +155,7 @@ public class Main extends Application {
         titleRoot.getChildren().add(startButton);
         titleRoot.getChildren().add(iconStartImage);
 
-//        gameRoot.getChildren().add(resetButton);
+        instructionRoot.getChildren().add(playButton);
 
         Image endImage = new Image("full-penguin.png");
         ImageView iconEndImage = new ImageView(endImage);

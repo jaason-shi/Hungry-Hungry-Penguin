@@ -19,7 +19,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -29,21 +28,57 @@ import java.util.ArrayList;
  * @version 2023-04
  */
 public class Main extends Application {
-    Sprite penguin = new Sprite();
-    ArrayList<Sprite> fishList = new ArrayList<>();
-    ArrayList<Sprite> wallList = new ArrayList<>();
-    ArrayList<String> inputList = new ArrayList<>();
-    int verticalWallCount = 4;
-    int horizontalWallCount = 4;
-    int fishCount = 30;
-    Timer gameTimer;
+
+    /**
+     * The penguin Sprite object that represents the player.
+     */
+    private Sprite penguin = new Sprite();
+
+    /**
+     * The ArrayList of fish Sprite objects that represent the food.
+     */
+    private ArrayList<Sprite> fishList = new ArrayList<>();
+
+    /**
+     * The ArrayList of wall Sprite objects that represent the obstacles.
+     */
+    private ArrayList<Sprite> wallList = new ArrayList<>();
+
+    /**
+     * The ArrayList of input String objects that represent the player's input in the game.
+     */
+    private ArrayList<String> inputList = new ArrayList<>();
+
+    /**
+     * The number of vertical walls in the game.
+     */
+    private static final int VERTICAL_WALL_COUNT = 4;
+
+    /**
+     * The number of horizontal walls in the game.
+     */
+    private static final int HORIZONTAL_WALL_COUNT = 4;
+
+    /**
+     * The number of fish in the game.
+     */
+    private static final int FISH_COUNT = 30;
+
+    /**
+     * The timer to keep track of the time elapsed in the game.
+     */
+    private Timer gameTimer;
+
+    /**
+     * Resets the game.
+     */
     private void resetGame() {
         gameTimer.resetTimer();
         penguin.position.set(100, 100);
         inputList.clear();
         fishList.clear();
         wallList.clear();
-        for (int i = 0; i < verticalWallCount; i++) {
+        for (int i = 0; i < VERTICAL_WALL_COUNT; i++) {
             Sprite wall = new Sprite();
             wall.setImage("ice-platform-vertical.png");
             do {
@@ -54,7 +89,7 @@ public class Main extends Application {
             wallList.add(wall);
         }
 
-        for (int i = 0; i < horizontalWallCount; i++) {
+        for (int i = 0; i < HORIZONTAL_WALL_COUNT; i++) {
             Sprite wall = new Sprite();
             wall.setImage("ice-platform-horizontal.png");
             do {
@@ -65,7 +100,7 @@ public class Main extends Application {
             wallList.add(wall);
         }
 
-        for (int i = 0; i < fishCount; i++) {
+        for (int i = 0; i < FISH_COUNT; i++) {
             Sprite fish = new Sprite();
             fish.setImage("fish-small.png");
             do {
@@ -77,8 +112,12 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Starts the game and sets the scenes.
+     * @param stage the stage to be displayed
+     */
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         stage.setTitle("Hungry Hungry Penguin");
         stage.getIcons().add(new Image("penguin.png"));
         stage.setResizable(false);
@@ -217,7 +256,7 @@ public class Main extends Application {
         penguin.position.set(100, 100);
         penguin.setImage("penguin-small.png");
 
-        for (int i = 0; i < verticalWallCount; i++) {
+        for (int i = 0; i < VERTICAL_WALL_COUNT; i++) {
             Sprite wall = new Sprite();
             wall.setImage("ice-platform-vertical.png");
             do {
@@ -228,7 +267,7 @@ public class Main extends Application {
             wallList.add(wall);
         }
 
-        for (int i = 0; i < horizontalWallCount; i++) {
+        for (int i = 0; i < HORIZONTAL_WALL_COUNT; i++) {
             Sprite wall = new Sprite();
             wall.setImage("ice-platform-horizontal.png");
             do {
@@ -239,7 +278,7 @@ public class Main extends Application {
             wallList.add(wall);
         }
 
-        for (int i = 0; i < fishCount; i++) {
+        for (int i = 0; i < FISH_COUNT; i++) {
             Sprite fish = new Sprite();
             fish.setImage("fish-small.png");
             do {
@@ -251,6 +290,11 @@ public class Main extends Application {
             }
 
         AnimationTimer gameLoop = new AnimationTimer() {
+
+            /**
+             * Creates the game loop.
+             * @param now The current time in nanoseconds.
+             */
             @Override
             public void handle(final long now) {
                 penguin.render(context);

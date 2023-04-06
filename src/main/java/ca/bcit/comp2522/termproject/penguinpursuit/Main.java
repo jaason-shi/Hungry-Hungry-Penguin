@@ -150,6 +150,7 @@ public class Main extends Application {
         playAgainButton.setPrefWidth(80);
         playAgainButton.setPrefHeight(40);
         playAgainButton.setOnAction(event -> {
+            resetGame();
             stage.setScene(gameScene);
             stage.show();
         });

@@ -19,12 +19,16 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The Main driver class for the Hungry Hungry Penguin Game.
+ *
+ * @author Natalie Yu and Jason Shi
+ * @version 2023-04
+ */
 public class Main extends Application {
-
     Sprite penguin = new Sprite();
     ArrayList<Sprite> fishList = new ArrayList<>();
     ArrayList<Sprite> wallList = new ArrayList<>();
@@ -115,9 +119,9 @@ public class Main extends Application {
         instructionTitle.setFill(Color.INDIANRED);
 
         Text instructionText = new Text();
-        instructionText.setText("Mr. Penguin is very hungry... please help Mr. Penguin collect all the fish as fast as possible!" +
-                "\n \nUse the arrow keys to move the penguin. \nYou can hit the Escape Key to reset the game. " +
-                "\n \nClick Play to start the game.");
+        instructionText.setText("Mr. Penguin is very hungry... please help Mr. Penguin collect all the fish as fast as possible!"
+                + "\n \nUse the arrow keys to move the penguin. \nYou can hit the Escape Key to reset the game. "
+                + "\n \nClick Play to start the game.");
         instructionText.setWrappingWidth(700);
         instructionText.setTextAlignment(TextAlignment.CENTER);
         instructionText.setX(55);
@@ -191,7 +195,7 @@ public class Main extends Application {
         gameRoot.setCenter(canvas);
 
         context.setFill(Color.SKYBLUE);
-        context.fillRect(0,0,800,600);
+        context.fillRect(0, 0, 800, 600);
 
         gameScene.setOnKeyPressed(
                 (KeyEvent event) -> {
@@ -248,32 +252,32 @@ public class Main extends Application {
 
         AnimationTimer gameLoop = new AnimationTimer() {
             @Override
-            public void handle(long now) {
+            public void handle(final long now) {
                 penguin.render(context);
 
                 gameTimer.startTimer();
 
                 penguin.speed.set(0, 0);
 
-                if(inputList.contains("LEFT") && penguin.position.xCoordinate > 0) {
+                if (inputList.contains("LEFT") && penguin.position.xCoordinate > 0) {
                     penguin.speed.add(-75, 0);
                 }
-                if(inputList.contains("RIGHT") && penguin.position.xCoordinate < gameScene.getWidth() - penguin.image.getWidth()) {
+                if (inputList.contains("RIGHT") && penguin.position.xCoordinate < gameScene.getWidth() - penguin.image.getWidth()) {
                     penguin.speed.add(75, 0);
                 }
-                if(inputList.contains("UP") && penguin.position.yCoordinate > 0) {
+                if (inputList.contains("UP") && penguin.position.yCoordinate > 0) {
                     penguin.speed.add(0, -75);
                 }
-                if(inputList.contains("DOWN") && penguin.position.yCoordinate < gameScene.getHeight() - penguin.image.getHeight()) {
+                if (inputList.contains("DOWN") && penguin.position.yCoordinate < gameScene.getHeight() - penguin.image.getHeight()) {
                     penguin.speed.add(0, 75);
                 }
-                if(inputList.contains("ESCAPE")) {
+                if (inputList.contains("ESCAPE")) {
                     resetGame();
                     stage.setScene(gameScene);
                     stage.show();
                 }
 
-                penguin.speed.multiply(1/60.0);
+                penguin.speed.multiply(1 / 60.0);
                 penguin.position.add(penguin.speed);
 
                 for (int i = 0; i < fishList.size(); i++) {
@@ -290,13 +294,13 @@ public class Main extends Application {
                     }
                 }
                 context.setFill(Color.SKYBLUE);
-                context.fillRect(0,0,800,600);
+                context.fillRect(0, 0, 800, 600);
 
-                for(Sprite fish: fishList) {
+                for (Sprite fish: fishList) {
                     fish.render(context);
                 }
 
-                for(Sprite wall: wallList) {
+                for (Sprite wall: wallList) {
                     wall.render(context);
                 }
 
@@ -307,7 +311,7 @@ public class Main extends Application {
                 context.setLineWidth(2);
                 context.setFill(Color.BLACK);
                 context.setStroke(Color.BLACK);
-                if(fishLeft > 0) {
+                if (fishLeft > 0) {
                     context.fillText("Fish Left: " + fishLeft, 25, 40);
                     context.strokeText("Fish Left: " + fishLeft, 25, 40);
                 } else {
@@ -323,7 +327,12 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    /**
+     * Drives the program.
+     *
+     * @param args command line arguments
+     */
+    public static void main(final String[] args) {
         launch();
     }
 }

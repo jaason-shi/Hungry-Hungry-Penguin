@@ -3,7 +3,7 @@ package ca.bcit.comp2522.termproject.penguinpursuit;
 /**
  * The Rectangle class.
  *
- * @author Jason Shi
+ * @author Jason Shi and Natalie Yu
  * @version 2023-04
  */
 public class Rectangle {

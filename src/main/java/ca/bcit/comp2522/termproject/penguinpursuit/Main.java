@@ -146,7 +146,7 @@ public class Main extends Application {
             stage.show();
         });
 
-        Image startImage = new Image("igloo.jpg");
+        Image startImage = new Image("hungry-penguin.png");
         ImageView iconStartImage = new ImageView(startImage);
         iconStartImage.setX(260);
         iconStartImage.setY(175);

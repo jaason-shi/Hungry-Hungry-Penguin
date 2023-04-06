@@ -75,9 +75,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-//        Parent root =  FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-
         stage.setTitle("Hungry Hungry Penguin");
         stage.getIcons().add(new Image("penguin.png"));
         stage.setResizable(false);
@@ -107,6 +104,27 @@ public class Main extends Application {
         titleText.setY(140);
         titleText.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
         titleText.setFill(Color.NAVY);
+
+        Text instructionTitle = new Text();
+        instructionTitle.setText("HOW TO PLAY:");
+        instructionTitle.setWrappingWidth(700);
+        instructionTitle.setTextAlignment(TextAlignment.CENTER);
+        instructionTitle.setX(55);
+        instructionTitle.setY(200);
+        instructionTitle.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
+        instructionTitle.setFill(Color.INDIANRED);
+
+        Text instructionText = new Text();
+        instructionText.setText("Mr. Penguin is very hungry... please help Mr. Penguin collect all the fish as fast as possible!" +
+                "\n \nUse the arrow keys to move the penguin. \nYou can hit the Escape Key to reset the game. " +
+                "\n \nClick Play to start the game.");
+        instructionText.setWrappingWidth(700);
+        instructionText.setTextAlignment(TextAlignment.CENTER);
+        instructionText.setX(55);
+        instructionText.setY(250);
+        instructionText.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        instructionText.setFill(Color.NAVY);
+
 
         Text endingText = new Text();
         endingText.setX(100);
@@ -155,7 +173,7 @@ public class Main extends Application {
         titleRoot.getChildren().add(startButton);
         titleRoot.getChildren().add(iconStartImage);
 
-        instructionRoot.getChildren().add(playButton);
+        instructionRoot.getChildren().addAll(playButton, instructionTitle, instructionText);
 
         Image endImage = new Image("full-penguin.png");
         ImageView iconEndImage = new ImageView(endImage);
@@ -284,7 +302,7 @@ public class Main extends Application {
                 penguin.render(context);
 
                 int fishLeft = fishList.size();
-                context.setFont(new Font("Verdana", 36));
+                context.setFont(new Font("Verdana", 30));
                 context.setLineWidth(2);
                 context.setFill(Color.BLACK);
                 context.setStroke(Color.BLACK);

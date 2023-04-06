@@ -39,7 +39,7 @@ public class Timer {
      */
     public Timer(final Label timerLabel) {
         this.timerLabel = timerLabel;
-        timerLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        timerLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
         timerLabel.setTextFill(Color.BLACK);
         timerLabel.setPrefSize(100, 50);
 

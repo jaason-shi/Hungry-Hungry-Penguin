@@ -136,16 +136,16 @@ public class Main extends Application {
             stage.show();
         });
 
-        Button resetButton = new Button("Reset");
-        resetButton.setLayoutX(365);
-        resetButton.setLayoutY(500);
-        resetButton.setPrefWidth(80);
-        resetButton.setPrefHeight(40);
-        resetButton.setOnAction(event -> {
-            resetGame();
-            stage.setScene(gameScene);
-            stage.show();
-        });
+//        Button resetButton = new Button("Reset");
+//        resetButton.setLayoutX(365);
+//        resetButton.setLayoutY(500);
+//        resetButton.setPrefWidth(80);
+//        resetButton.setPrefHeight(40);
+//        resetButton.setOnAction(event -> {
+//            resetGame();
+//            stage.setScene(gameScene);
+//            stage.show();
+//        });
 
         Image startImage = new Image("igloo.jpg");
         ImageView iconStartImage = new ImageView(startImage);
@@ -156,7 +156,7 @@ public class Main extends Application {
         titleRoot.getChildren().add(startButton);
         titleRoot.getChildren().add(iconStartImage);
 
-        gameRoot.getChildren().add(resetButton);
+//        gameRoot.getChildren().add(resetButton);
 
         Image endImage = new Image("full-penguin.png");
         ImageView iconEndImage = new ImageView(endImage);
@@ -248,6 +248,11 @@ public class Main extends Application {
                 }
                 if(inputList.contains("DOWN") && penguin.position.yCoordinate < gameScene.getHeight() - penguin.image.getHeight()) {
                     penguin.speed.add(0, 75);
+                }
+                if(inputList.contains("ESCAPE")) {
+                    resetGame();
+                    stage.setScene(gameScene);
+                    stage.show();
                 }
 
                 penguin.speed.multiply(1/60.0);

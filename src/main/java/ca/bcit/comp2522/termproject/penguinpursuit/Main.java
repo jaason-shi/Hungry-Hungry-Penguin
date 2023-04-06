@@ -120,7 +120,7 @@ public class Main extends Application {
 
         Text instructionText = new Text();
         instructionText.setText("Mr. Penguin is very hungry... please help Mr. Penguin collect all the fish as fast as possible!"
-                + "\n \nUse the arrow keys to move the penguin. \nYou can hit the Escape Key to reset the game. "
+                + "\n \nUse the arrow keys to move the penguin. \nYou can hit the Space Key to reset the game and the Escape Key to quit the game."
                 + "\n \nClick Play to start the game.");
         instructionText.setWrappingWidth(700);
         instructionText.setTextAlignment(TextAlignment.CENTER);
@@ -271,10 +271,13 @@ public class Main extends Application {
                 if (inputList.contains("DOWN") && penguin.position.yCoordinate < gameScene.getHeight() - penguin.image.getHeight()) {
                     penguin.speed.add(0, 75);
                 }
-                if (inputList.contains("ESCAPE")) {
+                if (inputList.contains("SPACE")) {
                     resetGame();
                     stage.setScene(gameScene);
                     stage.show();
+                }
+                if (inputList.contains("ESCAPE")) {
+                    stage.close();
                 }
 
                 penguin.speed.multiply(1 / 60.0);
@@ -287,8 +290,7 @@ public class Main extends Application {
                     }
                 }
 
-                for (int i = 0; i < wallList.size(); i++) {
-                    Sprite wall = wallList.get(i);
+                for (Sprite wall : wallList) {
                     if (penguin.intersects(wall)) {
                         penguin.position.set(penguin.position.xCoordinate - penguin.speed.xCoordinate, penguin.position.yCoordinate - penguin.speed.yCoordinate);
                     }

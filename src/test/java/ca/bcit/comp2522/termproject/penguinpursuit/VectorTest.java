@@ -4,8 +4,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The VectorTest class.
+ *
+ * @author Natalie Yu and Jason Shi
+ * @version 2023-04
+ */
 class VectorTest {
 
+    /**
+     * Tests the add method.
+     */
     @Test
     void add() {
         Vector vector1 = new Vector(1, 2);
@@ -15,6 +24,9 @@ class VectorTest {
         assertEquals(6, vector1.yCoordinate);
     }
 
+    /**
+     * Tests the multiply method.
+     */
     @Test
     void multiply() {
         Vector vector = new Vector(1, 2);

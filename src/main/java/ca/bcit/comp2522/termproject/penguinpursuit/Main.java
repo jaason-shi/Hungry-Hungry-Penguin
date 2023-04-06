@@ -32,22 +32,22 @@ public class Main extends Application {
     /**
      * The penguin Sprite object that represents the player.
      */
-    private Sprite penguin = new Sprite();
+    private final Sprite penguin = new Sprite();
 
     /**
      * The ArrayList of fish Sprite objects that represent the food.
      */
-    private ArrayList<Sprite> fishList = new ArrayList<>();
+    private final ArrayList<Sprite> fishList = new ArrayList<>();
 
     /**
      * The ArrayList of wall Sprite objects that represent the obstacles.
      */
-    private ArrayList<Sprite> wallList = new ArrayList<>();
+    private final ArrayList<Sprite> wallList = new ArrayList<>();
 
     /**
      * The ArrayList of input String objects that represent the player's input in the game.
      */
-    private ArrayList<String> inputList = new ArrayList<>();
+    private final ArrayList<String> inputList = new ArrayList<>();
 
     /**
      * The number of vertical walls in the game.
@@ -78,26 +78,24 @@ public class Main extends Application {
         inputList.clear();
         fishList.clear();
         wallList.clear();
+        generateWallsAndFish(penguin);
+    }
+
+    /**
+     * Generates the walls and fish for the game.
+     * @param penguin the penguin Sprite object
+     */
+    private void generateWallsAndFish(Sprite penguin) {
         for (int i = 0; i < VERTICAL_WALL_COUNT; i++) {
             Sprite wall = new Sprite();
             wall.setImage("ice-platform-vertical.png");
-            do {
-                double x = Math.random() * 600 + 100;
-                double y = Math.random() * 400 + 100;
-                wall.position.set(x, y);
-            } while (wall.intersectsAny(wallList) || wall.intersects(penguin) || wall.intersectsAny(fishList));
-            wallList.add(wall);
+            displayWalls(penguin, wall);
         }
 
         for (int i = 0; i < HORIZONTAL_WALL_COUNT; i++) {
             Sprite wall = new Sprite();
             wall.setImage("ice-platform-horizontal.png");
-            do {
-                double x = Math.random() * 600 + 100;
-                double y = Math.random() * 400 + 100;
-                wall.position.set(x, y);
-            } while (wall.intersectsAny(wallList) || wall.intersects(penguin) || wall.intersectsAny(fishList));
-            wallList.add(wall);
+            displayWalls(penguin, wall);
         }
 
         for (int i = 0; i < FISH_COUNT; i++) {
@@ -110,6 +108,20 @@ public class Main extends Application {
             } while (fish.intersectsAny(wallList) || fish.intersectsAny(fishList) || fish.intersects(penguin));
             fishList.add(fish);
         }
+    }
+
+    /**
+     * Displays the walls in randomized positions in the game.
+     * @param penguin the penguin Sprite object
+     * @param wall the wall Sprite object
+     */
+    private void displayWalls(Sprite penguin, Sprite wall) {
+        do {
+            double x = Math.random() * 600 + 100;
+            double y = Math.random() * 400 + 100;
+            wall.position.set(x, y);
+        } while (wall.intersectsAny(wallList) || wall.intersects(penguin) || wall.intersectsAny(fishList));
+        wallList.add(wall);
     }
 
     /**
@@ -153,18 +165,21 @@ public class Main extends Application {
         instructionTitle.setWrappingWidth(700);
         instructionTitle.setTextAlignment(TextAlignment.CENTER);
         instructionTitle.setX(55);
-        instructionTitle.setY(200);
+        instructionTitle.setY(150);
         instructionTitle.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
         instructionTitle.setFill(Color.INDIANRED);
 
         Text instructionText = new Text();
-        instructionText.setText("Mr. Penguin is very hungry... please help Mr. Penguin collect all the fish as fast as possible!"
-                + "\n \nUse the arrow keys to move the penguin. \nYou can hit the Space Key to reset the game and the Escape Key to quit the game."
-                + "\n \nClick Play to start the game.");
+        instructionText.setText("""
+                Mr. Penguin is very hungry... please help Mr. Penguin collect all the fish as fast as possible!"
+                \n Use the arrow keys to move the penguin. 
+                \nYou can hit the Space Key to reset the game and the Escape Key to quit the game."
+                \n Click Play to start the game.
+                """);
         instructionText.setWrappingWidth(700);
         instructionText.setTextAlignment(TextAlignment.CENTER);
         instructionText.setX(55);
-        instructionText.setY(250);
+        instructionText.setY(230);
         instructionText.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         instructionText.setFill(Color.NAVY);
 
@@ -256,38 +271,7 @@ public class Main extends Application {
         penguin.position.set(100, 100);
         penguin.setImage("penguin-small.png");
 
-        for (int i = 0; i < VERTICAL_WALL_COUNT; i++) {
-            Sprite wall = new Sprite();
-            wall.setImage("ice-platform-vertical.png");
-            do {
-                double x = Math.random() * 600 + 100;
-                double y = Math.random() * 400 + 100;
-                wall.position.set(x, y);
-            } while (wall.intersectsAny(wallList) || wall.intersects(penguin) || wall.intersectsAny(fishList));
-            wallList.add(wall);
-        }
-
-        for (int i = 0; i < HORIZONTAL_WALL_COUNT; i++) {
-            Sprite wall = new Sprite();
-            wall.setImage("ice-platform-horizontal.png");
-            do {
-                double x = Math.random() * 600 + 100;
-                double y = Math.random() * 400 + 100;
-                wall.position.set(x, y);
-            } while (wall.intersectsAny(wallList) || wall.intersects(penguin) || wall.intersectsAny(fishList));
-            wallList.add(wall);
-        }
-
-        for (int i = 0; i < FISH_COUNT; i++) {
-            Sprite fish = new Sprite();
-            fish.setImage("fish-small.png");
-            do {
-                double x = Math.random() * 600 + 100;
-                double y = Math.random() * 400 + 100;
-                fish.position.set(x, y);
-            } while (fish.intersectsAny(wallList) || fish.intersectsAny(fishList) || fish.intersects(penguin));
-            fishList.add(fish);
-            }
+        generateWallsAndFish(penguin);
 
         AnimationTimer gameLoop = new AnimationTimer() {
 

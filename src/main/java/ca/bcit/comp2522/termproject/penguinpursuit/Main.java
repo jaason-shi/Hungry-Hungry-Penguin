@@ -31,6 +31,7 @@ public class Main extends Application {
     int horizontalWallCount = 5;
     int fishCount = 30;
     private void resetGame() {
+        penguin.position.set(100, 100);
         inputList.clear();
         fishList.clear();
         wallList.clear();
@@ -125,17 +126,23 @@ public class Main extends Application {
             stage.show();
         });
 
-        Image image = new Image("igloo.jpg");
-        ImageView iconImage = new ImageView(image);
-        iconImage.setX(260);
-        iconImage.setY(175);
+        Image startImage = new Image("igloo.jpg");
+        ImageView iconStartImage = new ImageView(startImage);
+        iconStartImage.setX(260);
+        iconStartImage.setY(175);
 
         titleRoot.getChildren().add(titleText);
         titleRoot.getChildren().add(startButton);
-        titleRoot.getChildren().add(iconImage);
+        titleRoot.getChildren().add(iconStartImage);
+
+        Image endImage = new Image("full-penguin.png");
+        ImageView iconEndImage = new ImageView(endImage);
+        iconEndImage.setX(280);
+        iconEndImage.setY(225);
 
         endRoot.getChildren().add(endingText);
         endRoot.getChildren().add(playAgainButton);
+        endRoot.getChildren().add(iconEndImage);
 
         Canvas canvas = new Canvas(800, 600);
         GraphicsContext context = canvas.getGraphicsContext2D();

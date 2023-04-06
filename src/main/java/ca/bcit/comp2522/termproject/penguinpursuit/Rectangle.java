@@ -30,12 +30,13 @@ public class Rectangle {
 
     /**
      * The Rectangle constructor that creates a new Rectangle object with specified coordinates and dimensions.
+     *
      * @param xCoordinate the x-coordinate of the top-left corner of the rectangle
      * @param yCoordinate the y-coordinate of the top-left corner of the rectangle
      * @param width the width of the rectangle
      * @param height the height of the rectangle
      */
-    public Rectangle(double xCoordinate, double yCoordinate, double width, double height) {
+    public Rectangle(final double xCoordinate, final double yCoordinate, final double width, final double height) {
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
         this.width = width;
@@ -44,14 +45,15 @@ public class Rectangle {
 
     /**
      * Returns true if this rectangle intersects with another rectangle.
+     *
      * @param other the other Rectangle object to check for an intersection with
      * @return true if this rectangle intersects with another rectangle, false otherwise
      */
-    public boolean intersects(Rectangle other) {
-        boolean noOverlap = this.xCoordinate + this.width < other.xCoordinate ||
-                other.xCoordinate + other.width < this.xCoordinate ||
-                this.yCoordinate + this.height < other.yCoordinate ||
-                other.yCoordinate + other.height < this.yCoordinate;
+    public boolean intersects(final Rectangle other) {
+        boolean noOverlap = this.xCoordinate + this.width < other.xCoordinate
+                || other.xCoordinate + other.width < this.xCoordinate
+                || this.yCoordinate + this.height < other.yCoordinate
+                || other.yCoordinate + other.height < this.yCoordinate;
         return !noOverlap;
     }
 }

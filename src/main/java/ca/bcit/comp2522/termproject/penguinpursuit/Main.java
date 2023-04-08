@@ -220,6 +220,7 @@ public class Main extends Application {
         playButton.setPrefHeight(40);
         playButton.setOnAction(event -> {
             stage.setScene(gameScene);
+            gameTimer.startTimer();
             stage.show();
         });
 
@@ -282,8 +283,6 @@ public class Main extends Application {
             @Override
             public void handle(final long now) {
                 penguin.render(context);
-
-                gameTimer.startTimer();
 
                 penguin.speed.set(0, 0);
 
